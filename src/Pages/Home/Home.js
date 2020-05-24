@@ -73,7 +73,7 @@ import sampleimg from '../../assets/img/MenuCheese.jpg'
                                             </li>
                                             <li>
                                             <span><i class="fas fa-phone-volume"></i></span>
-                                                <p>+6512358498</p>
+                                                <p>+6412358498</p>
                                             </li>
                                             <li>
                                                 <span><i class="fas fa-link"></i></span>
@@ -114,7 +114,7 @@ import sampleimg from '../../assets/img/MenuCheese.jpg'
                                             </li>
                                             <li>
                                             <span><i class="fas fa-phone-volume"></i></span>
-                                                <p>+6512358498</p>
+                                                <p>+6412358498</p>
                                             </li>
                                             <li>
                                                 <span><i class="fas fa-link"></i></span>
@@ -155,7 +155,7 @@ import sampleimg from '../../assets/img/MenuCheese.jpg'
                                             </li>
                                             <li>
                                             <span><i class="fas fa-phone-volume"></i></span>
-                                                <p>+6512358498</p>
+                                                <p>+6412358498</p>
                                             </li>
                                             <li>
                                                 <span><i class="fas fa-link"></i></span>
