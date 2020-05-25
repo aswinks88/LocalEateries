@@ -65,6 +65,9 @@
     max-width: 1270px;
     width: 94%;
 }
+.locationcount{
+    margin-right: 0px;
+}
 /* .current-location span {
     font-weight: 600;
     display: flex;

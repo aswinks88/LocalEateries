@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './Header.css'
+import {Link} from 'react-router-dom'
  class Header extends Component {
     render() {
         return (
             <nav className='navbar navbar-expand-lg navbar-dark'>
-                <a to='/' className='navbar-brand '>Local Eateries</a>
+                <Link to='/' className='navbar-brand '>Local Eateries</Link>
                 <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -12,15 +13,17 @@ import './Header.css'
                 <div className='navbar-collapse collapse' id='navbarNavAltMarkup'>
                     <ul className='navbar-nav ml-auto'>
                         <li className='navbar-item'>
-                            <a to='/' className='nav-link active'>Home</a>
+                            <Link to='/' className='nav-link active'>
+                            Home
+                            </Link>
                         </li>
                         
                         <li className='navbar-item'>
-                            <a to='/create' className='nav-link active'>Register your restaurant</a>
+                            <Link to='/addrestaurant' className='nav-link active'>Register your restaurant</Link>
                         </li>
                         
                         <li className='navbar-item'>
-                            <a to='/user' className='nav-link active'>About</a>
+                            <a to='/user' className='nav-link active'>Login</a>
                         </li>
                     </ul>
 

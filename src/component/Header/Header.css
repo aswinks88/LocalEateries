@@ -18,6 +18,9 @@
     /* background-color: white; */
     /* color: rgb(0, 0, 0) !important; */
 }
+/* .navbar-item .nav-link{
+   color: rgb(255, 35, 35);
+} */
 .navbar-nav .pull-right{
     float: right;
 }

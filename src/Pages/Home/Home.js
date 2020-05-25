@@ -40,7 +40,7 @@ import FeatureCard from '../../component/FeatureCard/FeatureCard'
             </div>
            </section>
            <div className='current-location'>
-                <div className='row justify-content-center'>
+                <div className='row justify-content-center locationcount'>
                     <span>200 local eateries near you: &nbsp;<span className='bg-red'>Mt Eden, Auckland</span></span>
                 </div>
            </div>
