@@ -1,7 +1,9 @@
 .home-content{ 
         background-color:#0095B6;
         background-size: cover;
-        min-height: 800px;
+        min-height: 600px;
+        background: url('../../assets/img/cover.jpg')
+        center / cover no-repeat;
 }
 .content-heading{
     text-align: center;
@@ -17,7 +19,7 @@
     font-weight: 300;
 } */
 .content-heading h5 {
-    color: #424141;
+    color: #ffffff;
     font-weight: 400;
     margin: 24px 0;
 }
@@ -84,7 +86,7 @@
     background-size: 100%;
 }
 .featured-place-wrap {
-    background: #fff;
+    background: rgb(255, 254, 254);
     margin: 0 0 30px;
     -webkit-transition: all .5s ease;
     -o-transition: all .5s ease;
@@ -94,7 +96,7 @@
 .featured-place-wrap a {
     display: block;
     text-decoration: none;
-    color: #000;
+    color: rgb(255, 255, 255);
 }
 .featured-place-wrap img {
     width: 100%;
@@ -171,19 +173,14 @@ p {
     line-height: 1;
     padding: 0 0 0 12px;
 }
-.bg-light {
-    background: #f3f4f7;
-}
+/* .bg-light {
+    background: #d0d0d1 !important;
+} */
 
 .featured-btn-wrap {
     text-align: center;
 }
 
-@media (max-width: 1200px){
-.featured-btn-wrap {
-    margin: 3px 0 0;
-}
-}
 .featured-btn-wrap .btn-danger {
     background: #ff3a6d;
     padding: 16px 50px;
@@ -192,6 +189,17 @@ p {
     transition: 0.3s;
     border: 0;
 }
+
+@media (max-width: 992px){
+.slider-content h1{
+    font-size: 40px;
+}
+}
+@media (max-width: 1200px){
+    .featured-btn-wrap {
+        margin: 3px 0 0;
+    }
+    }
 @media (max-width: 1200px){
 .featured-title ul li span {
     padding: 0 4px 0 0;

@@ -16,12 +16,9 @@ import './Header.css'
                         </li>
                         
                         <li className='navbar-item'>
-                            <a to='/create' className='nav-link active'>Search</a>
+                            <a to='/create' className='nav-link active'>Register your restaurant</a>
                         </li>
                         
-                        <li className='navbar-item'>
-                            <a to='/user' className='nav-link active'>Restaurants</a>
-                        </li>
                         <li className='navbar-item'>
                             <a to='/user' className='nav-link active'>About</a>
                         </li>

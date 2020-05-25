@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Home.css'
-import sampleimg from '../../assets/img/MenuCheese.jpg'
+import FeatureCard from '../../component/FeatureCard/FeatureCard'
  class Home extends Component {
     render() {
         return (
@@ -54,130 +54,9 @@ import sampleimg from '../../assets/img/MenuCheese.jpg'
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='col-md-4 featured-responsive'>
-                            <div className='featured-place-wrap'>
-                                <a href='#'>
-                                    <img src={sampleimg} className='img-fluid' alt='#' />
-                                    <span className='featured-rating-orange'>4.5</span>
-                                    <div className='featured-title'>
-                                        <h6>Sal's</h6>
-                                        <p>Restaurant</p>
-                                        <span>.</span>
-                                        <p>50 Reviews</p>
-                                        <span> . </span>
-                                        <p><span>****</span></p>
-                                        <ul>
-                                            <li>
-                                                <span><i className="fas fa-map-marker-alt"></i></span>
-                                                <p>Mt Eden</p>
-                                            </li>
-                                            <li>
-                                            <span><i class="fas fa-phone-volume"></i></span>
-                                                <p>+6412358498</p>
-                                            </li>
-                                            <li>
-                                                <span><i class="fas fa-link"></i></span>
-                                                <p>www.sals.co.nz</p>
-                                            </li>
-                                            <li>
-                                                <span><i class="fas fa-truck"></i></span>
-                                                <p>Online orders, Uber eats</p>
-                                            </li>
-                                        </ul>
-                                        <div className='bottom-icons'>
-                                            <div className='closed-now'>
-                                                Closed Now
-                                            </div>
-                                        <span><i class="fas fa-link"></i></span>
-                                        <span><i class="fas fa-bookmark"></i></span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div className='col-md-4 featured-responsive'>
-                            <div className='featured-place-wrap'>
-                                <a href='#'>
-                                    <img src={sampleimg} className='img-fluid' alt='#' />
-                                    <span className='featured-rating-orange'>4.5</span>
-                                    <div className='featured-title'>
-                                        <h6>Sal's</h6>
-                                        <p>Restaurant</p>
-                                        <span>.</span>
-                                        <p>50 Reviews</p>
-                                        <span> . </span>
-                                        <p><span>****</span></p>
-                                        <ul>
-                                            <li>
-                                                <span><i className="fas fa-map-marker-alt"></i></span>
-                                                <p>Mt Eden</p>
-                                            </li>
-                                            <li>
-                                            <span><i class="fas fa-phone-volume"></i></span>
-                                                <p>+6412358498</p>
-                                            </li>
-                                            <li>
-                                                <span><i class="fas fa-link"></i></span>
-                                                <p>www.sals.co.nz</p>
-                                            </li>
-                                            <li>
-                                                <span><i class="fas fa-truck"></i></span>
-                                                <p>Online orders, Uber eats</p>
-                                            </li>
-                                        </ul>
-                                        <div className='bottom-icons'>
-                                            <div className='closed-now'>
-                                                Closed Now
-                                            </div>
-                                        <span><i class="fas fa-link"></i></span>
-                                        <span><i class="fas fa-bookmark"></i></span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div className='col-md-4 featured-responsive'>
-                            <div className='featured-place-wrap'>
-                                <a href='#'>
-                                    <img src={sampleimg} className='img-fluid' alt='#' />
-                                    <span className='featured-rating-orange'>4.5</span>
-                                    <div className='featured-title'>
-                                        <h6>Sal's</h6>
-                                        <p>Restaurant</p>
-                                        <span>.</span>
-                                        <p>50 Reviews</p>
-                                        <span> . </span>
-                                        <p><span>****</span></p>
-                                        <ul>
-                                            <li>
-                                                <span><i className="fas fa-map-marker-alt"></i></span>
-                                                <p>Mt Eden</p>
-                                            </li>
-                                            <li>
-                                            <span><i class="fas fa-phone-volume"></i></span>
-                                                <p>+6412358498</p>
-                                            </li>
-                                            <li>
-                                                <span><i class="fas fa-link"></i></span>
-                                                <p>www.sals.co.nz</p>
-                                            </li>
-                                            <li>
-                                                <span><i class="fas fa-truck"></i></span>
-                                                <p>Online orders, Uber eats</p>
-                                            </li>
-                                        </ul>
-                                        <div className='bottom-icons'>
-                                            <div className='closed-now'>
-                                                Closed Now
-                                            </div>
-                                        <span><i class="fas fa-link"></i></span>
-                                        <span><i class="fas fa-bookmark"></i></span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        
+                        <FeatureCard />
+                        <FeatureCard />
+                        <FeatureCard />
                     </div>
                     <div className='row justify-content-center'>
                             <div className='col-md-4'>
@@ -194,3 +73,31 @@ import sampleimg from '../../assets/img/MenuCheese.jpg'
     }
 }
 export default Home
+
+{/* <div className = 'col-xs-12 col-sm-6 col-md-4 food-item'>
+                            <div className='food-item-wrap'>
+                                <div className='figure-wrap'>
+                                    <div className='distance'>
+                                        <i className="fas fa-pin"></i>
+                                    </div>
+                                    <div className='rating fa-pull-left' >
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    </div>
+                                    <div className='review pull-right'>
+                                    <a href="#">198 reviews</a>
+                                    </div>
+                                </div>
+                                <div className='content'>
+                                    <h5>
+                                        <a href='#'>Sal's</a>
+                                    </h5>
+                                    <div className=''>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> */}
