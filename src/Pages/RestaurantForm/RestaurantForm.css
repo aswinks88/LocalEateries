@@ -74,9 +74,62 @@ input[type=text]:focus{
     -webkit-transition: 0.2s;
     transition: 0.2s;
 }
+[type="radio"]:checked {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+[type="radio"]:checked + label {
+    padding-left: 26px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    font-weight: normal;
+}
+[type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 1rem;
+    transition: .28s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+[type="radio"] + label:before, [type="radio"] + label:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 4px;
+    width: 16px;
+    height: 16px;
+    z-index: 0;
+    transition: .28s ease;
+}
+[type="radio"].with-gap.radio-col-red:checked + label:before {
+    border: 2px solid #F44336;
+}
+[type="radio"].with-gap.radio-col-red:checked + label:after {
+    background-color: #F44336;
+    border: 2px solid #F44336;
+}
+[type="radio"]:not(:checked) + label:before, 
+[type="radio"]:not(:checked) + label:after, 
+[type="radio"]:checked + label:before, 
+[type="radio"]:checked + label:after, 
+[type="radio"].with-gap:checked + label:before, 
+[type="radio"].with-gap:checked + label:after {
+    border-radius: 50%;
+}
 .form-header{
     text-align: center;
     padding: 10px;
+    border-bottom: 2px solid rgb(189, 186, 186);
 }
 .btn:not(.btn-link):not(.btn-circle) {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);

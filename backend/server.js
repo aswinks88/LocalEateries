@@ -2,10 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-require('dotenv').config({debug: process.env.DEBUG })
-const port = process.env.PORT || 6000
+require('dotenv').config()
+const port = process.env.PORT || 5001
+const restaurantRouter = require('./routes/newRestaurant.route')
 const app = express()
-
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
@@ -21,6 +21,7 @@ const connection = mongoose.connection
 connection.once('open', () => {
     console.log('mongodb connection established successfully')
 })
+app.use('/restaurant', restaurantRouter)
 app.listen(port, () =>{
     console.log(`server is running on port: http://localhost:${port}`)
 })

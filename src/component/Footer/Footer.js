@@ -8,7 +8,7 @@ import './Footer.css'
                     <div className='row'>
                         <div className='col-md-12'>
                             <div className='copyright'>
-                                <p>Developed by Aswin K.S, Fullstack Developer</p>
+                                <p>This website can be used as a free advertising plaform for the restaurants in New Zealand</p>
                             </div>
                         </div>
                     </div>

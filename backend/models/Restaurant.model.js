@@ -3,17 +3,19 @@ const Schema = mongoose.Schema
 
 const restaurantSchema = new Schema({
     name: {type: String, required: true},
+    address: {
+        street: {type: String, required: true},
+        suburb: {type: String, required: true},
+        city: {type: String, required: true},
+        zip: {type: Number, required: true}
+    },
     email: {type: String, required: true},
     website: {type: String, required: true},
     phonenumber:{type: String, required: true},
-    delivery: {type: String, required: true},
-    workinghours: {type: TimeRanges, required: true},
-    address: {
-        street: {type: String, required: true},
-        city: {type: String, required: true},
-        state: {type: String, required: true},
-        zip: {type: Number, required: true}
-    },
+    deliveryservices: {type: String, required: true},
+    charges: {type: String, required: true},
+    contactless:  {type: String, required: true},
+    openinghours:  {type: String, required: true},
     uniqueid: {type: String, required: true},
     date: {type: Date, required: true}
 },

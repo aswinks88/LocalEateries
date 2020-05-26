@@ -23,7 +23,7 @@ import {Link} from 'react-router-dom'
                         </li>
                         
                         <li className='navbar-item'>
-                            <a to='/user' className='nav-link active'>Login</a>
+                            <Link to='/login' className='nav-link active'>Login</Link>
                         </li>
                     </ul>
 
