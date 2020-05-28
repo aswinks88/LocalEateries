@@ -73,31 +73,3 @@ import FeatureCard from '../../component/FeatureCard/FeatureCard'
     }
 }
 export default Home
-
-{/* <div className = 'col-xs-12 col-sm-6 col-md-4 food-item'>
-                            <div className='food-item-wrap'>
-                                <div className='figure-wrap'>
-                                    <div className='distance'>
-                                        <i className="fas fa-pin"></i>
-                                    </div>
-                                    <div className='rating fa-pull-left' >
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    </div>
-                                    <div className='review pull-right'>
-                                    <a href="#">198 reviews</a>
-                                    </div>
-                                </div>
-                                <div className='content'>
-                                    <h5>
-                                        <a href='#'>Sal's</a>
-                                    </h5>
-                                    <div className=''>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}

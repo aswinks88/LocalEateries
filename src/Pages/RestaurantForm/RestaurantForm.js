@@ -1,56 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
+import useForm from '../../customhooks/useForm'
 import './RestaurantForm.css'
 import axios from 'axios'
 import uid from 'cuid'
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import ValidateForm from './ValidateForm'
 const uniqueId = uid()
-class RestaurantForm extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            name: '',
-            street: '',
-            suburb: '',
-            zip: '',
-            city: '',
-            email: '',
-            phonenumber: '',
-            delivery: '',
-            charges: '',
-            contactless:'',
-            website:'',
-            openinghours:''
-        }
-        this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-    }
-    onChange(e){
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-    async onSubmit(e){
-        e.preventDefault()
+const RestaurantForm =()=> {
+    const onSubmit = async (e) => {
+       
         console.log(1)
         const restaurantData = {
-            name: this.state.name,
+            name: values.name,
             address: {
-                street: this.state.street,
-                suburb: this.state.suburb,
-                city: this.state.city,
-                zip: this.state.zip
+                street: values.street,
+                suburb: values.suburb,
+                city: values.city,
+                zip: values.zip
             },
-            email: this.state.email,
-            phonenumber: this.state.phonenumber,
-            deliveryservices: this.state.delivery,
-            charges: this.state.charges,
-            contactless: this.state.contactless,
-            website: this.state.website,
-            openinghours: this.state.openinghours,
+            email: values.email,
+            phonenumber: values.phonenumber,
+            deliveryservices: values.delivery,
+            charges: values.charges,
+            contactless: values.contactless,
+            website: values.website,
+            openinghours: values.openinghours,
             uniqueid: uniqueId,
             date: new Date()
         }
@@ -64,7 +37,11 @@ class RestaurantForm extends Component {
                 console.log(err)
             })
     }
-    render() {
+   
+    const {onChange,
+        handleSubmit,
+        values, errors} = useForm(onSubmit, ValidateForm)
+  
         return (
             <section className='form-container'>
                 <div className='form-content'>
@@ -75,91 +52,115 @@ class RestaurantForm extends Component {
                             <h3>Registration form</h3>
                             </div>
                             <div className='body'>
-                            <form onSubmit={this.onSubmit} className='form-rest'>
+                            <form onSubmit={handleSubmit} className='form-rest'>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Name of the restaurant'
                                         name='name'
-                                        onChange={this.onChange}/>
+                                        value={values.name}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.name && <p className='error'>{errors.name}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Street Address'
                                         name='street'
-                                        onChange={this.onChange}/>
+                                        value={values.street}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.street && <p className='error'>{errors.street}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Suburb'
                                         name='suburb'
-                                        onChange={this.onChange}/>
+                                        value={values.suburb}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.suburb && <p className='error'>{errors.suburb}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Zip/ Postal code'
                                         name='zip'
-                                        onChange={this.onChange}/>
+                                        value={values.zip}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.zip && <p className='error'>{errors.zip}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='City'
                                         name='city'
-                                        onChange={this.onChange}/>
+                                        value={values.city}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.city && <p className='error'>{errors.city}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Email'
                                         name='email'
-                                        onChange={this.onChange}/>
+                                        value={values.email}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.email&& <p className='error'>{errors.email}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Phone Number'
                                         name='phonenumber'
-                                        onChange={this.onChange}/>
+                                        value={values.phonenumber}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.phonenumber && <p className='error'>{errors.phonenumber}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Delivery services (eg: online order, uber eats etc)'
                                         name='delivery'
-                                        onChange={this.onChange}/>
+                                        value={values.delivery}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
-                                        <input type='text' className='form-control' placeholder='Basic charges if you have your own delivery'
+                                        <input type='text' className='form-control' placeholder='Minimum charges if you have your own delivery'
                                         name='charges'
-                                        onChange={this.onChange}/>
+                                        value={values.charges}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.charges && <p className='error'>{errors.charges}</p>}
                                 </div>
                                 <div className='form-group'>
                                     {/* change this to radio button */}
                                     <div className='form-line focused'>
                                     <input type='text' className='form-control' placeholder='contactless delivery (if available)'
                                         name='contactless'
-                                        onChange={this.onChange}/>
-                                                                    </div>
+                                        value={values.contactless}
+                                        onChange={onChange}/>
+                                    </div>
+                                    {errors.contactless && <p className='error'>{errors.contactless}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Website'
                                         name='website'
-                                        onChange={this.onChange}/>
+                                        value={values.website}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.website && <p className='error'>{errors.website}</p>}
                                 </div>
                                 <div className='form-group'>
                                     <div className='form-line focused'>
                                         <input type='text' className='form-control' placeholder='Opening hours'
                                         name='openinghours'
-                                        onChange={this.onChange}/>
+                                        value={values.openinghours}
+                                        onChange={onChange}/>
                                     </div>
+                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
                                 </div>
                                 <button type='submit' className='btn btn-primary m-t-15 waves-effect'>Submit</button>
                             </form>
@@ -172,16 +173,6 @@ class RestaurantForm extends Component {
             </section>
            
         )
-    }
+    
 }
 export default RestaurantForm
-
-{/* <section className=' d-flex align-items-center'>
-
-<div className='form-container col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-    <div className='form-header'>
-        <h4>Registration form</h4>
-        <input type='text'/>
-    </div>
-</div>
-</section> */}
