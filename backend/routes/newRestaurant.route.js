@@ -1,5 +1,12 @@
 const router = require('express').Router()
 const restaurantModel = require('../models/Restaurant.model')
+const multer = require('multer')
+const path = require('path')
+const uuid = require('uuidv4')
+// path(__dirname,'images')
+const DIR = path.resolve('../backend/images')
+
+
 router.route('/add').post((req, res) => {
     const name = req.body.name
     const street = req.body.address.street
@@ -33,7 +40,7 @@ router.route('/add').post((req, res) => {
         date,
         uniqueid,
     })
-    console.log(Restaurant)
+    // console.log(Restaurant)
     Restaurant.save()
     .then(() => {
         res.json('New Restaurant Registered')
@@ -41,4 +48,37 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error ' + err))
 })
 
+//handling file upload here, this is based on the documentaion from multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, DIR)
+    },
+    filename: (req, file, cb) => {
+        const fileName = file.originalname.toLowerCase().split(' ').join('-')
+        cb(null, file.fieldname + '-' + fileName)
+    }
+})
+
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
+            cb(null, true)
+        } else {
+            cb(null, false)
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed'))
+        }
+    }
+})
+
+router.route('/fileupload').post(upload.array('addfiles', 5),(req, res, next)=> {
+    const reqFiles = [];
+    // console.log(req.)
+    const url = req.protocol + '://' + req.get('host')
+    for (var i = 0; i < req.files.length; i++) {
+        reqFiles.push(url + DIR + req.files[i].filename)
+    }
+  console.log(reqFiles)
+    res.send(reqFiles)
+}) 
 module.exports = router

@@ -61,7 +61,7 @@ import FeatureCard from '../../component/FeatureCard/FeatureCard'
                     <div className='row justify-content-center'>
                             <div className='col-md-4'>
                                 <div className='featured-btn-wrap'>
-                                    <button class='btn btn-danger'>View All</button>
+                                    <button className='btn btn-danger'>View All</button>
                                 </div>
                             </div>  
                         </div>

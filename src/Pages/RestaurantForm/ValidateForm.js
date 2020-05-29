@@ -1,4 +1,4 @@
-export default function ValidateForm(values){
+export default function ValidateForm(values, useFile){
     let errors = {}
     if(!values.email){
         errors.email = 'Email address is required'
@@ -39,6 +39,9 @@ export default function ValidateForm(values){
      if(!values.openinghours){
         errors.openinghours = 'opening hours are required'
     } 
+    if(!useFile.addfiles){
+        errors.addfiles = 'At least one image is required to upload'
+    }
 
 
     return errors
