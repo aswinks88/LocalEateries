@@ -3,7 +3,8 @@ import useForm from '../../customhooks/useForm'
 import './RestaurantForm.css'
 import axios from 'axios'
 import uid from 'cuid'
-import ValidateForm from './ValidateForm'
+import ValidateForm from '../ValidateFormField/ValidateForm'
+import {Link} from 'react-router-dom'
 // import  {useDropzone} from 'react-dropzone'
 import FileUpload from '../../component/FileUpload/FileUpload'
 const uniqueId = uid()
@@ -45,17 +46,8 @@ const RestaurantForm =()=> {
                 console.log(err)
             })
             // handling file upload
-            console.log(useFile.addfiles)
             const formData = new FormData()
-            // formData.append('file', useFile.addfiles[0], useFile.addfiles.name)
-            // for(const key in Object.keys(useFile.addfiles)){
-            //     formData.append('addfiles', useFile.addfiles[key])
-            // }
-            // useFile.map((file, index) => {
-            //     return formData.append(`file${index}`, file)
-            // })
            Object.keys(useFile.addfiles).map((key) => {
-            console.log(useFile.addfiles)
                return formData.append('addfiles', useFile.addfiles[key], useFile.addfiles[key].name)
             })
             console.log(formData.getAll('addfiles'))
@@ -79,6 +71,7 @@ const RestaurantForm =()=> {
         values, useFile, errors} = useForm(onSubmit, ValidateForm)
   
         return (
+            
             <section className='form-container'>
                 <div className='form-content'>
                     <div className='row clearfix'>
@@ -89,121 +82,137 @@ const RestaurantForm =()=> {
                             </div>
                             <div className='body'>
                             <form onSubmit={handleSubmit}  encType='multipart/form-data' className='form-rest'>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                            <h4 className='form-section'>
+                            <i className="fas fa-utensils"></i>
+                            Business Info
+                            </h4>
+                                <div className='form-group row'>
+                                    <label className='col-md-3 label-control'>Name of the restaurant</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Name of the restaurant'
                                         name='name'
                                         value={values.name}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.name && <p className='error'>{errors.name}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Street Address</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Street Address'
                                         name='street'
                                         value={values.street}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.street && <p className='error'>{errors.street}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Suburb</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Suburb'
                                         name='suburb'
                                         value={values.suburb}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.suburb && <p className='error'>{errors.suburb}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Zip/ Postal code</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Zip/ Postal code'
                                         name='zip'
                                         value={values.zip}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.zip && <p className='error'>{errors.zip}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>City</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='City'
                                         name='city'
                                         value={values.city}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.city && <p className='error'>{errors.city}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Email</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Email'
                                         name='email'
                                         value={values.email}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.email&& <p className='error'>{errors.email}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Phone Number</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Phone Number'
                                         name='phonenumber'
                                         value={values.phonenumber}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.phonenumber && <p className='error'>{errors.phonenumber}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Delivery services</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Delivery services (eg: online order, uber eats etc)'
                                         name='delivery'
                                         value={values.delivery}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Minimum charges</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Minimum charges if you have your own delivery'
                                         name='charges'
                                         value={values.charges}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.charges && <p className='error'>{errors.charges}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
+                                <div className='form-group row'>
                                     {/* change this to radio button */}
-                                    <div className='form-line focused'>
+                                <label className='col-md-3 label-control'>contactless delivery</label>
+                                    <div className='col-md-9'>
                                     <input type='text' className='form-control' placeholder='contactless delivery (if available)'
                                         name='contactless'
                                         value={values.contactless}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.contactless && <p className='error'>{errors.contactless}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Website</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Website'
                                         name='website'
                                         value={values.website}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.website && <p className='error'>{errors.website}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Opening hours</label>
+                                    <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Opening hours'
                                         name='openinghours'
                                         value={values.openinghours}
                                         onChange={onChange}/>
-                                    </div>
                                     {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <div className='form-line focused'>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Select images</label>
+                                    <div className='col-md-9'>
                                         {/* <FileUpload /> */}
                                         <input type='file' 
-                                       
-                                        className='form-control' 
+                                        className='fileinput' 
                                         onChange={onChange}
                                         multiple/>
                                         {/* <div {...getRootProps()}>
@@ -214,10 +223,18 @@ const RestaurantForm =()=> {
                                             <p>Drag 'n' drop some files here, or click to select files</p>
                                         }
                                         </div> */}
-                                    </div>
                                     {errors.addfiles && <p className='error'>{errors.addfiles}</p>}
+                                    </div>
                                 </div>
-                                <button type='submit' className='btn btn-primary m-t-15 waves-effect'>Submit</button>
+                                <div className='form-actions row justify-content-center'>
+                                <Link to='/' className='btn btn-warning mr-3'>
+                                <i className="fas fa-window-close"></i>
+                                    Cancel</Link>
+                                <button type='submit' className='btn btn-primary'>
+                                <i className="fas fa-save"></i>
+                                    Submit</button>
+                                </div>
+                               
                             </form>
                             </div>
                     </div>
@@ -226,6 +243,8 @@ const RestaurantForm =()=> {
                     </div>
                 </div>
             </section>
+      
+            
            
         )
     

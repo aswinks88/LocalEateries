@@ -25,6 +25,9 @@ import {Link} from 'react-router-dom'
                         <li className='navbar-item'>
                             <Link to='/login' className='nav-link active'>Login</Link>
                         </li>
+                        <li className='navbar-item'> 
+                            <Link to='/userregistration' className='nav-link active'>Signup</Link>
+                        </li>
                     </ul>
 
                 </div>

@@ -42,6 +42,11 @@ export default function ValidateForm(values, useFile){
     if(!useFile.addfiles){
         errors.addfiles = 'At least one image is required to upload'
     }
+    
+    // if(useFile.addfiles.length > 5){
+    //     errors.addfiles = 'You cannot upload more than 5 images'
+    // }
+
 
 
     return errors

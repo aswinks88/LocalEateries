@@ -126,6 +126,7 @@
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     margin-bottom: 5px;
+    color: #000000;
 }
 
 h6 {

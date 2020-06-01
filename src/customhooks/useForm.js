@@ -15,7 +15,7 @@ const useForm = (callbkfn, ValidateForm) => {
     website:'',
     openinghours:''
    })
-
+  
 //error handling
 const [errors, setErrors] = useState({})
 
@@ -23,8 +23,6 @@ const [isSubmitting, setisSubmitting] = useState(false)
 
 
    const onChange = (e) => {
-    console.log(e.target.files)
-    console.log(e.target.value)
        setValues({
            ...values,
             [e.target.name]: e.target.value
@@ -34,7 +32,6 @@ const [isSubmitting, setisSubmitting] = useState(false)
             ...useFile,
             addfiles: e.target.files
         })
-        console.log(useFile)
     }
 const handleSubmit = async (e) => {
     e.preventDefault()
