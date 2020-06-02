@@ -6,6 +6,11 @@ const uuid = require('uuidv4')
 // path(__dirname,'images')
 const DIR = path.resolve('../backend/images')
 
+router.route('/').get((req,res) => {
+    restaurantModel.find()
+    .then(Restaurant => res.json(Restaurant))
+    .catch(err => res.status(400).json('Error: ' + err))
+})
 
 router.route('/add').post((req, res) => {
     const name = req.body.name

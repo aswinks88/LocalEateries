@@ -5,8 +5,10 @@ import axios from 'axios'
 import uid from 'cuid'
 import ValidateForm from '../ValidateFormField/ValidateForm'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {addItems} from '../../actions/itemActions'
+import PropTypes from 'prop-types'
 // import  {useDropzone} from 'react-dropzone'
-import FileUpload from '../../component/FileUpload/FileUpload'
 const uniqueId = uid()
 const RestaurantForm =()=> {
     // const [file, setFile] = useState('')
@@ -36,8 +38,25 @@ const RestaurantForm =()=> {
             uniqueid: uniqueId,
             date: new Date()
         }
-            await axios.post('http://localhost:5001/restaurant/add', restaurantData)
-            .then(async res => {
+        addItems(restaurantData)
+            // await axios.post('http://localhost:5001/restaurant/add', restaurantData)
+            // .then(async res => {
+            //     if(res.status === 200){
+            //         console.log('success')
+            //     }
+            // })
+            // .catch(err => {
+            //     console.log(err)
+            // })
+            // handling file upload
+            const formData = new FormData()
+           Object.keys(useFile.addfiles).map((key) => {
+               return formData.append('addfiles', useFile.addfiles[key], useFile.addfiles[key].name)
+            })
+            // console.log(formData.getAll('addfiles'))
+
+           await axios.post('http://localhost:5001/restaurant/fileupload', formData)
+            .then(res => {
                 if(res.status === 200){
                     console.log('success')
                 }
@@ -45,26 +64,8 @@ const RestaurantForm =()=> {
             .catch(err => {
                 console.log(err)
             })
-            // handling file upload
-            const formData = new FormData()
-           Object.keys(useFile.addfiles).map((key) => {
-               return formData.append('addfiles', useFile.addfiles[key], useFile.addfiles[key].name)
-            })
-            console.log(formData.getAll('addfiles'))
-
-           await axios.post('http://localhost:5001/restaurant/fileupload', formData)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
 
     }
-    // const onChangeFileHandler = (e) => {
-    //     console.log(e.target.values)
-    //     // setFile(e.target.files)
-    // }
    
     const {onChange,
         handleSubmit,
@@ -246,7 +247,14 @@ const RestaurantForm =()=> {
       
             
            
-        )
-    
+        )  
 }
-export default RestaurantForm
+// RestaurantForm.propTypes = {
+//     addItems: PropTypes.func.isRequired,
+//     item: PropTypes.object.isRequired
+// }
+const mapStatetoProps = (state) => ({
+    item: state.item
+})
+// console.log(mapStatetoProps)
+export default connect(mapStatetoProps, {addItems})(RestaurantForm)

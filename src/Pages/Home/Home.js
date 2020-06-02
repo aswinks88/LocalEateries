@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import './Home.css'
 import FeatureCard from '../../component/FeatureCard/FeatureCard'
+import {connect} from 'react-redux'
+import {getItems} from '../../actions/itemActions'
+import PropTypes from 'prop-types'
  class Home extends Component {
+     componentDidMount(){
+         console.log(this.props.getItems())
+     }
     render() {
+        console.log(this.props.item)
         return (
             <div>
             <section className='home-content d-flex align-items-center'>
@@ -72,4 +79,11 @@ import FeatureCard from '../../component/FeatureCard/FeatureCard'
         )
     }
 }
-export default Home
+Home.propTypes = {
+getItems: PropTypes.func.isRequired,
+item: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    item: state.item
+})
+export default connect(mapStateToProps, {getItems})(Home)

@@ -12,8 +12,11 @@ import Footer from  '../src/component/Footer/Footer'
 import Login from '../src/Pages/Login/Login'
 import RestaurantForm from '../src/Pages/RestaurantForm/RestaurantForm'
 import UserRegistration from '../src/Pages/UserRegistration/UserRegistration'
+import {Provider} from 'react-redux'
+import store from '../src/redux/store'
 function App() {
   return (
+    <Provider store={store}>
     <Router>
     <Header />
     <Switch>
@@ -24,6 +27,8 @@ function App() {
     </Switch>
     <Footer />
     </Router>
+    </Provider>
+    
    
   );
 }

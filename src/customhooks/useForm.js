@@ -43,6 +43,7 @@ const handleSubmit = async (e) => {
 //submits the form
 useEffect(() => {
 if(Object.keys(errors).length === 0 && isSubmitting){
+    console.log('its true')
 callbkfn()
 }
 }, [callbkfn, errors, isSubmitting])
