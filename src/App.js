@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import '@fortawesome/fontawesome-free/css/fontawesome.css'
@@ -14,23 +14,34 @@ import RestaurantForm from '../src/Pages/RestaurantForm/RestaurantForm'
 import UserRegistration from '../src/Pages/UserRegistration/UserRegistration'
 import {Provider} from 'react-redux'
 import store from '../src/redux/store'
-function App() {
-  return (
-    <Provider store={store}>
-    <Router>
-    <Header />
-    <Switch>
-      <Route path='/' exact component = {Home} />
-      <Route path='/addrestaurant' exact component={RestaurantForm}/>
-      <Route path='/login' exact component={Login}/>
-      <Route path='/userregistration' exact component={UserRegistration} />
-    </Switch>
-    <Footer />
-    </Router>
-    </Provider>
-    
-   
-  );
+import {loadUser} from './actions/Authactions'
+import Restaurant from '../src/component/FeatureDetail/FeatureDetail'
+import test from './Pages/test/testPage'
+class App extends Component {
+  componentDidMount(){
+    store.dispatch(loadUser())
+  }
+  render(){
+    return (
+      <Provider store={store}>
+      <Router>
+      {/* <Header /> */}
+      <Switch>
+        <Route path='/' exact component = {Home} />
+        <Route path='/addrestaurant' exact component={RestaurantForm}/>
+        <Route path='/login' exact component={Login}/>
+        <Route path='/userregistration' exact component={UserRegistration} />
+        <Route path='/restaurantdetail' exact component={Restaurant} />
+        <Route path='/testpage' exact component={test}/>
+      </Switch>
+      <Footer />
+      </Router>
+      </Provider>
+      
+     
+    )
+  }
+
 }
 
 export default App;

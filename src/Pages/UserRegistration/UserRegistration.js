@@ -1,17 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import useForm from '../../customhooks/useLogin'
 import './UserRegistration.css'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import ValidateLogin from '../ValidateFormField/ValidateLogin'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import {register} from '../../actions/Authactions'
 const UserRegistration = ()=>{
+    // useEffect(prevProps => {
+    //     const {error} = 
+    // })
     const onSubmit = async () => {
         const  userData = {
             name: useUser.name,
             email: useUser.email,
             password: useUser.password
         }
-        console.log(userData)
+        // console.log(userData)
+        // register(userData)
         await axios.post('http://localhost:5001/user/add', userData)
         .then(res => {
             if(res.status === 200){
@@ -112,5 +119,14 @@ const UserRegistration = ()=>{
         )
     
 }
-
-export default UserRegistration
+UserRegistration.propTypes = {
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired
+  }
+const mapStateToProps = state => ({
+    //we are getting this from root reducer
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.error
+})
+export default  connect(mapStateToProps, {register})(UserRegistration)

@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+// const morgan = require('morgan')
+// const cookie = require('cookie-parser')
 // const bodyParser = require('body-parser')
 require('dotenv').config()
 const port = process.env.PORT || 5001
@@ -10,6 +12,8 @@ const auth = require('./routes/Auth/Auth')
 const app = express()
 app.use(cors())
 app.use(express.json())
+// app.use(morgan)
+// app.use(cookie)
 // app.use(bodyParser.json())
 // app.use(bodyParser.urlencoded({extended: true}))
 const uri = process.env.ATLAS_URI

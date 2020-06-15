@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import sampleimg from '../../assets/img/MenuCheese.jpg'
+import {Link} from 'react-router-dom'
 class FeatureCard extends Component {
     constructor(props){
         super(props)
@@ -12,7 +13,7 @@ class FeatureCard extends Component {
             
                  <div className='col-md-4 featured-responsive'>
                             <div className='featured-place-wrap'>
-                                <a href='#'>
+                                <Link to='/restaurantdetail'>
                                     <img src={sampleimg} className='img-fluid' alt='#' />
                                     <span className='featured-rating-orange'>4.5</span>
                                     <div className='featured-title'>
@@ -54,7 +55,7 @@ class FeatureCard extends Component {
                                         <span><i className="fas fa-heart"></i></span>
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
             

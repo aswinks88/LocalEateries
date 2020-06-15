@@ -3,6 +3,8 @@ const User = require('../models/User.modal')
 const bcrypt = require('bcryptjs')
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
+
+
 router.post('/add', (req, res) => {
    const {name, email, password} = req.body
 
@@ -20,6 +22,7 @@ router.post('/add', (req, res) => {
         email, 
         password
        })
+       console.log(user)
       bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
               if(err) throw err
@@ -43,9 +46,17 @@ router.post('/add', (req, res) => {
                       }
                       )
               })
+              .catch(err => {
+                  res.send('user already exist')
+              })
           })
       }) 
    })
 })
 
+router.get('/users', (req,res) => {
+    User.find()
+    .sort({date: -1})
+    .then(items => {res.json(items)})
+})
 module.exports = router

@@ -14,12 +14,16 @@
     left: 0;
     z-index: 12;
     width: 100%;
-    background-color: #252a33;
+    
     /* background-color: white; */
     /* color: rgb(0, 0, 0) !important; */
+    background-color: #252a33;
 }
 /* .navbar-item .nav-link{
    color: rgb(255, 35, 35);
+} */
+/* nav.scroll{
+    background-color: #252a33;
 } */
 .navbar-nav .pull-right{
     float: right;
