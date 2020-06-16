@@ -18,7 +18,7 @@
     height: 700px;
 }
 .container1 .home-title {
-    margin-top: 30px;
+    margin-top: 170px;
     position: relative;
     top:0;
     left: 0;
@@ -40,24 +40,22 @@ font-weight: 700;
 font-size: 18px;
 }
 .container1 .input-search{
-    margin: 15px;
+     margin: 15px;
      display: flex;
      justify-content: center;
 }
 
     
-.input-search input{
+ .input-search input{
      border:2px solid rgba(0, 0, 0, 0.431);
      border-radius: 5px;
-      width: 40%;
+      width: 50%;
       height: 50px;
       margin-left: auto;
       margin-right: auto;
       padding: 10px;
   }
-  .input-search input::selection{
-      border:2px solid rgba(255, 0, 0, 0.431);
-   }
+ 
   .button-search {
       display: flex;
       justify-content: center;
@@ -179,18 +177,11 @@ margin: 2em 0 0 0;
     height: 30px;
     float: right;
 }
-.logo {
-    margin-top: 15px;
-}
-.logo p {
-    font-size: 50px;
-    font-style: oblique;
-    font-family: 'Times New Roman', Times, serif;
-}
+
 @media screen and (min-width: 300px) and (max-width: 600px){
     .input-search input{
-        border:2px solid rgba(0, 0, 0, 0.431);
-        border-radius: 5px;
+        border:0px solid rgba(0, 0, 0, 0.431);
+        border-radius: 0px;
          width: 100%;
          margin-left: auto;
          margin-right: auto;
@@ -220,10 +211,9 @@ margin: 2em 0 0 0;
         grid-template-columns: 1fr 1fr;
     }
     .input-search input{
-        border:2px solid rgba(0, 0, 0, 0.431);
-        border-radius: 5px;
+        border:0px solid rgba(0, 0, 0, 0.431);
+        border-radius: 0px;
          width: 100%;
-         /* height: 35px; */
          margin-left: auto;
          margin-right: auto;
          padding: 10px;
@@ -242,11 +232,14 @@ margin: 2em 0 0 0;
     }
 
     .input-search input{
-        border:2px solid rgba(0, 0, 0, 0.431);
-        border-radius: 5px;
-         width: 40%;
+        border:0px solid rgba(0, 0, 0, 0.431);
+        border-radius: 0px;
+         width: 50%;
          margin-left: auto;
          margin-right: auto;
          padding: 10px;
   }
+  .input-search input:hover{
+    border:2px solid rgba(255, 0, 0, 0.431);
+ }
 }

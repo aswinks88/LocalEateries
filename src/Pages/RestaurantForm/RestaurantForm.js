@@ -79,13 +79,13 @@ const RestaurantForm =()=> {
                     <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <div className='card'>
                             <div className='form-header'>
-                            <h3>Registration form</h3>
+                            <h3>Restaurant Registration form</h3>
                             </div>
                             <div className='body'>
                             <form onSubmit={handleSubmit}  encType='multipart/form-data' className='form-rest'>
                             <h4 className='form-section'>
                             <i className="fas fa-utensils"></i>
-                            Business Info
+                            Restaurant Address
                             </h4>
                                 <div className='form-group row'>
                                     <label className='col-md-3 label-control'>Name of the restaurant</label>
@@ -157,7 +157,225 @@ const RestaurantForm =()=> {
                                     {errors.phonenumber && <p className='error'>{errors.phonenumber}</p>}
                                     </div>
                                 </div>
+                               
                                 <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Website</label>
+                                    <div className='col-md-9'>
+                                        <input type='text' className='form-control' placeholder='Website'
+                                        name='website'
+                                        value={values.website}
+                                        onChange={onChange}/>
+                                    {errors.website && <p className='error'>{errors.website}</p>}
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Opening hours</label>
+                                    <div className='col-md-9'>
+                                        <input type='text' className='form-control' placeholder='Opening hours'
+                                        name='openinghours'
+                                        value={values.openinghours}
+                                        onChange={onChange}/>
+                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    </div>
+                                </div>
+
+                                <h4 className='form-section'>
+                                <i class="fas fa-align-justify"></i>
+                                About your Restaurant
+                                </h4>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>A short description about your restaurant</label>
+                                    <div className='col-md-9'>
+                                        <textarea className='form-control' placeholder='Tell us about your restaurant'
+                                        name='openinghours'
+                                        value={values.openinghours}
+                                        onChange={onChange}/>
+                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    </div>
+                                </div>
+
+
+                                <h4 className='form-section'>
+                                <i class="fas fa-concierge-bell"></i>
+                                Services
+                                </h4>
+                                
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Alcohol</label>
+                                <div className='col-md-9'> 
+                                <div className='input-group'>
+                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                        <input type='radio' className='custom-control-input'
+                                        name='yes'
+                                        checked
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Yes</label>
+                                        </div>
+                                        
+                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                        <input type='radio' className='custom-control-input'
+                                        name='yes'
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>No</label>
+                                        </div>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>     
+                                </div>  
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Meals</label>
+                                <div className='col-md-9'> 
+                                <div className='input-group'>
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        checked
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Breakfast</label>
+                                        </div>
+                                        
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Lunch</label>
+                                        </div>
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Dinner</label>
+                                        </div>
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Dessert</label>
+                                        </div>
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Cafe</label>
+                                        </div>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>   
+                                </div>
+                                   
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Restaurant Type</label>
+                                <div className='col-md-9'> 
+                                <div className='input-group'>
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        checked
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Dine-in</label>
+                                        </div>
+                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='yes'
+                                        
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Takeaway</label>
+                                        </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Seating Capacity</label>
+                                    <div className='col-md-9'>
+                                        <input type='text' className='form-control' placeholder='Indoor and Outdoor(if available) seating capacity'
+                                        name='delivery'
+                                        value={values.delivery}
+                                        onChange={onChange}/>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>
+                                </div>
+                                <h4 className='form-section'>
+                                <i class="fas fa-pizza-slice"></i>
+                                Type of Cuisine
+                                </h4>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Select Cuisine Type</label>
+                                    <div className='col-md-9'>
+                                        <select className='form-control' placeholder='typer of cuisine'
+                                        name='cuisine'
+                                        value={values.openinghours}
+                                        onChange={onChange}> 
+                                        <option value='Asian'>Asian</option>
+                                        <option value='American'>American</option>
+                                        <option>Indian</option>
+                                        <option>Chinese</option>
+                                        </select>
+                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    </div>
+                                </div>
+                                <h4 className='form-section'>
+                                <i class="fas fa-address-book"></i>
+                                Reservation Info
+                                </h4>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Is Booking available?</label>
+                                <div className='col-md-9'> 
+                                <div className='input-group'>
+                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                        <input type='radio' className='custom-control-input'
+                                        name='yes'
+                                        checked
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>Yes</label>
+                                        </div>
+                                        
+                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                        <input type='radio' className='custom-control-input'
+                                        name='yes'
+                                        value={values.delivery}
+                                        onChange={onChange}/> 
+                                        <label className='custom-control-label'>No</label>
+                                        </div>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>   
+                                </div>
+                                   
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Phone Booking</label>
+                                    <div className='col-md-9'>
+                                        <input type='text' className='form-control' placeholder='Landline or Mobile phone number for SMS booking'
+                                        name='delivery'
+                                        value={values.delivery}
+                                        onChange={onChange}/>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Online Booking (if available)</label>
+                                    <div className='col-md-9'>
+                                        <input type='text' className='form-control' placeholder='Website link for Online booking'
+                                        name='delivery'
+                                        value={values.delivery}
+                                        onChange={onChange}/>
+                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    </div>
+                                </div>
+                                <h4 className='form-section'>
+                                <i class="fas fa-car"></i>
+                                 Delivery Service Info
+                                </h4>
+                            <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Delivery services</label>
                                     <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Delivery services (eg: online order, uber eats etc)'
@@ -188,28 +406,31 @@ const RestaurantForm =()=> {
                                     {errors.contactless && <p className='error'>{errors.contactless}</p>}
                                     </div>
                                 </div>
+                                <h4 className='form-section'>
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Upload Logo and Food images
+                                </h4>
                                 <div className='form-group row'>
-                                <label className='col-md-3 label-control'>Website</label>
+                                <label className='col-md-3 label-control'>Upload Logo</label>
                                     <div className='col-md-9'>
-                                        <input type='text' className='form-control' placeholder='Website'
-                                        name='website'
-                                        value={values.website}
-                                        onChange={onChange}/>
-                                    {errors.website && <p className='error'>{errors.website}</p>}
+                                        {/* <FileUpload /> */}
+                                        <input type='file' 
+                                        className='fileinput' 
+                                        onChange={onChange}
+                                        />
+                                        {/* <div {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        {
+                                            isDragActive ?
+                                            <p>Drop the files here ...</p> :
+                                            <p>Drag 'n' drop some files here, or click to select files</p>
+                                        }
+                                        </div> */}
+                                    {errors.addfiles && <p className='error'>{errors.addfiles}</p>}
                                     </div>
                                 </div>
                                 <div className='form-group row'>
-                                <label className='col-md-3 label-control'>Opening hours</label>
-                                    <div className='col-md-9'>
-                                        <input type='text' className='form-control' placeholder='Opening hours'
-                                        name='openinghours'
-                                        value={values.openinghours}
-                                        onChange={onChange}/>
-                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
-                                    </div>
-                                </div>
-                                <div className='form-group row'>
-                                <label className='col-md-3 label-control'>Select images</label>
+                                <label className='col-md-3 label-control'>Select Food images</label>
                                     <div className='col-md-9'>
                                         {/* <FileUpload /> */}
                                         <input type='file' 

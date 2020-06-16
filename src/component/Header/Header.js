@@ -9,15 +9,17 @@ import Logout from '../../Pages/Auth/Logout'
        this.state = {
                checked: false,
                color:'',
-               className:'hamburger'
+               className:'hamburger',
+               colorOnNav:''
        }
        this.toggleMenu = this.toggleMenu.bind(this)
+       this.changeHamburgerColorHandler = this.changeHamburgerColorHandler.bind(this)
     }
      componentDidMount(){ 
 
          this.window = document.addEventListener('scroll', e => {
             const scrolled = document.scrollingElement.scrollTop
-            if(scrolled >= 600){
+            if(scrolled >= 200){
                this.setState({
                    color: 'black',
                })
@@ -29,6 +31,19 @@ import Logout from '../../Pages/Auth/Logout'
       
             }
         })
+        if(window.location.pathname !== '/'){
+            this.setState({
+                colorOnNav: 'black'
+            })    
+        }
+        console.log(window.location.pathname)
+     }
+   
+     changeHamburgerColorHandler = () => {
+        console.log(window.location.pathname)
+            this.setState({
+                colorOnNav: 'black'
+            })    
      }
     toggleMenu = (e) => {
         //using class .toggleham we can set the hamburger menu to its initial state from X when user click on the 
@@ -61,17 +76,21 @@ import Logout from '../../Pages/Auth/Logout'
     render() {
         return (
             <div className='menu-wrap' id='menu-wrap'>
+            <div className='logo' style={{backgroundColor:this.state.color ? 'black' : this.state.colorOnNav}}>
+                    <p>Local Eateries</p>
+                </div>
                      <input type='checkbox' id='toggleham' checked= {this.state.checked} onChange={this.toggleMenu}  className='toggleham' />
-                        <div style={{backgroundColor: this.state.color}} className='hamburger'>
+                        <div style={{backgroundColor: this.state.color ? 'black' : this.state.colorOnNav}} className='hamburger'>
                             <div></div>
                         </div>
                     <div className='menu-item'>
                         <div>
                             <div>
                             <ul className='menu-nav-item'>
-                                <li className='menu-nav-link'><Link to='/login'>Login</Link></li> 
-                                <li className='menu-nav-link'><Link to='/userregistration'>Signup</Link></li> 
-                                <li className='menu-nav-link'><Link to='/addrestaurant' className='nav-link active'>Register your restaurant</Link></li>
+                            <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/'>Home</Link></li> 
+                                <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/login'>Login</Link></li> 
+                                <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/userregistration'>Signup</Link></li> 
+                                <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/addrestaurant' className='nav-link active'>Register your restaurant</Link></li>
                                 <li className='menu-nav-link'> 
                                 <Link to='/testpage' className='nav-link active'>Test</Link>
                                 </li>
