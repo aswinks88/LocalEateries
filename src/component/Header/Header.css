@@ -1,30 +1,138 @@
-.navbar {
-    font-family: "Roboto", sans-serif;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-    /* -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); */
-    /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); */
-    border: none;
+.menu-wrap{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 12;
-    width: 100%;
-    
-    /* background-color: white; */
-    /* color: rgb(0, 0, 0) !important; */
-    background-color: #252a33;
+    z-index: 1;
+    }
+    .menu-wrap .toggleham{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        opacity: 0;
+    }
+    .menu-wrap .hamburger{
+        position: absolute;
+        top:0;
+        left:0;
+        padding: 1rem;
+        width: 60px;
+        height: 60px;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+    .menu-wrap .hamburger > div  {
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+    }
+    .menu-wrap .hamburger > div:before,
+    .menu-wrap .hamburger > div::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: -10px;
+        width: 100%;
+        height: 2px;
+        background: inherit;
+    }
+    .menu-wrap .hamburger > div::after {
+        top: 10px;
+    }
+    /* animate */
+    .menu-wrap .toggleham:checked + .hamburger > div {
+        transform: rotate(135deg);
+    }
+    /* x line */
+    .menu-wrap .toggleham:checked + .hamburger > div::before,
+    .menu-wrap .toggleham:checked + .hamburger > div::after {
+    top:0;
+    transform: rotate(90deg);
+    }
+    /* rotate hamburger on hover */
+    .menu-wrap .toggleham:checked:hover + .hamburger > div {
+        transform: rotate(225deg);
+    }
+    /* menu styling */
+    .menu-wrap .menu-item{
+        position: fixed;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .menu-wrap .menu-item > div {
+        background-color:  rgba(40, 3, 3, 0.66);
+        border-radius: 50%;
+        width: 200vw;
+        height: 200vw;
+        display: flex;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0);
+        transition: all 0.4s ease;
+    }
+    .menu-wrap .menu-item > div > div {
+        text-align: center;
+        max-width: 90vw;
+        max-height: 100vw;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    .menu-wrap .menu-item > div > div > ul > li{
+        list-style: none; 
+        padding: 1rem;
+    }
+    .menu-item a{
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 0.5rem;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        transition: color 0.4s linear;
+    }
+    /* open menu when hamburger is clicked */
+    .menu-wrap .toggleham:checked ~ .menu-item{
+        visibility: visible;
+    }
+    .menu-wrap .toggleham:checked ~ .menu-item > div {
+        transform: scale(1);
+        transition-duration:0.5s;
+    }
+    /* targeting the links inside div */
+    .menu-wrap .toggleham:checked ~ .menu-item > div > div{
+        opacity: 1;
+        transition: opacity 0, 4s ease;
+    }
+    @media all and (max-width: 360px){
+    .menu-item ul li a {
+        font-size: 15px;
+    }
 }
-/* .navbar-item .nav-link{
-   color: rgb(255, 35, 35);
-} */
-/* nav.scroll{
-    background-color: #252a33;
-} */
-.navbar-nav .pull-right{
-    float: right;
+@media all and (max-width: 500px){
+    .menu-item ul li a {
+        font-size: 15px;
+    }
+}
+@media all and (max-width: 768px){
+    .menu-item ul li a {
+        font-size: 25px;
+    }
 }

@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <Provider store={store}>
       <Router>
-      {/* <Header /> */}
+      <Header />
       <Switch>
         <Route path='/' exact component = {Home} />
         <Route path='/addrestaurant' exact component={RestaurantForm}/>

@@ -16,25 +16,35 @@ export default function testPage() {
     return (
         
         <div className='container-test'>
+            
             <section className='container1'>
-            <div className='hamburger'>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul>
-               <li><p>Login</p></li> 
-               <li><p>Signup</p></li> 
-            </ul>
-                
-                
-                <h1>Explore your local restaurant</h1>
-            <div className='input-search'>
+            <div className='menu-wrap'>
+                     <input type='checkbox' className='toggleham' />
+                        <div className='hamburger'>
+                            <div></div>
+                        </div>
+                    <div className='menu-item'>
+                        <div>
+                            <div>
+                            <ul className='menu-nav-item'>
+                                <li className='menu-nav-link'><a href='#'>Login</a></li> 
+                                <li className='menu-nav-link'><a href='#'>Signup</a></li> 
+                            </ul>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+             <div className='home-title'>
+                    <h1>Explore your local restaurant</h1>
+                    <div className='input-search'>
                 <input type='text' name='search' placeholder='Search for your local business'/> 
             </div>
             <div className='button-search'>
                  <button className='btn btn-outline-dark'>Search</button>
             </div>
+             </div>
+                
+           
            </section>
            <section className='section-info'>
                   <div className='card-large'>
