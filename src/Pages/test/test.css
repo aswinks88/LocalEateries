@@ -1,4 +1,4 @@
-.container-test{
+/* .container-test{
     display: grid;
     background-color: #faf7f7;
     grid-template-areas: 'container1' 'restaurant-detail' 'section-type' 'section-info';
@@ -6,7 +6,6 @@
 
 .container1{
     width: 100%;
-    /* max-width: 2000px; */
     margin: 0 auto 15px auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -328,7 +327,6 @@ margin: 2em 0 0 0;
         border:2px solid rgba(0, 0, 0, 0.431);
         border-radius: 5px;
          width: 100%;
-         /* height: 35px; */
          margin-left: auto;
          margin-right: auto;
          padding: 10px;
@@ -353,4 +351,4 @@ margin: 2em 0 0 0;
          margin-right: auto;
          padding: 10px;
   }
-}
+} */

@@ -18,7 +18,7 @@
     height: 700px;
 }
 .container1 .home-title {
-    margin-top: 300px;
+    margin-top: 30px;
     position: relative;
     top:0;
     left: 0;
@@ -179,7 +179,14 @@ margin: 2em 0 0 0;
     height: 30px;
     float: right;
 }
-
+.logo {
+    margin-top: 15px;
+}
+.logo p {
+    font-size: 50px;
+    font-style: oblique;
+    font-family: 'Times New Roman', Times, serif;
+}
 @media screen and (min-width: 300px) and (max-width: 600px){
     .input-search input{
         border:2px solid rgba(0, 0, 0, 0.431);
@@ -195,7 +202,12 @@ margin: 2em 0 0 0;
 .button-view-all .btn-info-all{
     float: left;
 }
-
+.home-title h1{
+    font-size: 35px;
+}
+.logo {
+    margin-top: 30px;
+}
 }
 @media screen and (min-width: 600px){
     .restaurant-detail {
@@ -216,7 +228,7 @@ margin: 2em 0 0 0;
          margin-right: auto;
          padding: 10px;
   }
-
+  
 }
 @media only screen and (min-width: 1000px){
     .restaurant-detail {

@@ -26,6 +26,9 @@ import bao from '../../assets/img/bao.jpg'
          <div className='container-test'>
             
             <section className='container1'>
+                <div className='logo'>
+                    <p>Local Eateries</p>
+                </div>
              <div className='home-title'>
                     <h1>Uncover great Local Eateries near you</h1>
                     <div className='input-search'>
