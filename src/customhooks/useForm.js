@@ -1,7 +1,11 @@
 import {useState, useEffect} from 'react'
-
+import { timeFromInt } from 'time-number'
 const useForm = (callbkfn, ValidateForm) => {
     const [useFile, setFile] = useState({ addfiles: ''})
+    const [time, setTime] = useState({
+        from:'',
+        to:''
+    })
     const [values, setValues] = useState({name: '',
     street: '',
     suburb: '',
@@ -13,7 +17,7 @@ const useForm = (callbkfn, ValidateForm) => {
     charges: '',
     contactless:'',
     website:'',
-    openinghours:''
+    openinghours:'', 
    })
   
 //error handling
@@ -23,11 +27,16 @@ const [isSubmitting, setisSubmitting] = useState(false)
 
 
    const onChange = (e) => {
+    //    console.log(e.target.name)
        setValues({
            ...values,
             [e.target.name]: e.target.value
         })
-        
+        // setTime({
+        //     ...time,
+        //     from: e.target.value,
+        //     to: e.target.value
+        // })
         setFile({
             ...useFile,
             addfiles: e.target.files

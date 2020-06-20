@@ -2,9 +2,13 @@
     font-size: 14px;
     color: #555;
     padding: 20px;
+    width: 100%;
 }
 .card{
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+form {
+    width: 100%;
 }
 .form-container{
     padding-top: 70px;
@@ -44,7 +48,7 @@ form .form-section i {
 }
 
 
-  form .form-control {
+form .form-control {
     border: 1px solid #CCD6E6;
     color: #3F587E;
 }
@@ -55,7 +59,6 @@ form .form-section i {
 .form-header{
     text-align: center;
     padding: 10px;
-    /* border-bottom: 2px solid rgb(189, 186, 186); */
 }
 .btn-primary {
     background-color: rgb(43, 184, 0)!important;
@@ -66,14 +69,11 @@ form .form-section i {
     background-color: rgb(43, 184, 0);
 }
 .btn-warning {
-    /* background-color: #FFA87D!important;
-    color: #FFF; */
     border: 2px solid black;
     background-color: rgb(0, 0, 0);
     color: white;
     width: 150px;
     height: 50px;
-    /* margin: 20px; */
     font-size: 20px;
     font-weight: 500;
 }
@@ -92,4 +92,106 @@ form .form-section i {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 5px;
+}
+.checkboxlabel, .radiolabel{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    padding-right: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 120px;
+    float: left;
+}
+.checkboxlabel input, .radiolabel input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkboxlabel input:checked~.check, .radiolabel input:checked~.radio {
+    background-color: rgb(0, 110, 255);
+}
+.check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #98A4B8;
+    border-radius: 5px;
+}
+.checkboxlabel input:checked~.check:after, .radiolabel input:checked~.radio:after {
+    display: block;
+}
+.checkboxlabel .check:after {
+    left: 7px;
+    top: 0px;
+    width: 8px;
+    height: 14px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+.check:after, .radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radio{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #98A4B8;
+    border-radius: 20px;
+}
+.radiolabel .radio:after {
+    top: 25%;
+    left: 25%;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.timelabel{
+    display: block;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 120px;
+    float: left;
+}
+.btn-add{
+    border: 2px solid black;
+    background-color: red;
+    color: white;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.4s;
+}
+.btn-add:hover{
+    color: white;
+    background-color: black;
+}
+.time-picker select{
+    width:120px;
 }

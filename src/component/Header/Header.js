@@ -14,6 +14,7 @@ import Logout from '../../Pages/Auth/Logout'
        }
        this.toggleMenu = this.toggleMenu.bind(this)
        this.changeHamburgerColorHandler = this.changeHamburgerColorHandler.bind(this)
+       this.homeHamburgerHandler = this.homeHamburgerHandler.bind(this)
     }
      componentDidMount(){ 
 
@@ -44,6 +45,12 @@ import Logout from '../../Pages/Auth/Logout'
             this.setState({
                 colorOnNav: 'black'
             })    
+     }
+     homeHamburgerHandler = () => {
+        this.setState({
+            color: '',
+            colorOnNav:''
+        })
      }
     toggleMenu = (e) => {
         //using class .toggleham we can set the hamburger menu to its initial state from X when user click on the 
@@ -77,7 +84,7 @@ import Logout from '../../Pages/Auth/Logout'
         return (
             <div className='menu-wrap' id='menu-wrap'>
             <div className='logo' style={{backgroundColor:this.state.color ? 'black' : this.state.colorOnNav}}>
-                    <p>Local Eateries</p>
+                    <Link onClick={this.homeHamburgerHandler} to='/'><p>Local Eateries</p></Link>
                 </div>
                      <input type='checkbox' id='toggleham' checked= {this.state.checked} onChange={this.toggleMenu}  className='toggleham' />
                         <div style={{backgroundColor: this.state.color ? 'black' : this.state.colorOnNav}} className='hamburger'>
@@ -87,7 +94,7 @@ import Logout from '../../Pages/Auth/Logout'
                         <div>
                             <div>
                             <ul className='menu-nav-item'>
-                            <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/'>Home</Link></li> 
+                            <li className='menu-nav-link'><Link onClick={this.homeHamburgerHandler} to='/'>Home</Link></li> 
                                 <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/login'>Login</Link></li> 
                                 <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/userregistration'>Signup</Link></li> 
                                 <li className='menu-nav-link'><Link onClick={this.changeHamburgerColorHandler} to='/addrestaurant' className='nav-link active'>Register your restaurant</Link></li>

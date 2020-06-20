@@ -1,4 +1,4 @@
-import React,{useCallback, useState} from 'react'
+import React, {useState} from 'react'
 import useForm from '../../customhooks/useForm'
 import './RestaurantForm.css'
 import axios from 'axios'
@@ -7,9 +7,16 @@ import ValidateForm from '../ValidateFormField/ValidateForm'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addItems} from '../../actions/itemActions'
-import PropTypes from 'prop-types'
+import TimePicker from 'react-bootstrap-time-picker';
+import { timeFromInt } from 'time-number'
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
+const days = {
+    day: [],
+    from:[],
+    to:[]
+}
+// const from = []
 const RestaurantForm =()=> {
     // const [file, setFile] = useState('')
     // const onDrop = useCallback(acceptedFiles => {
@@ -17,6 +24,96 @@ const RestaurantForm =()=> {
     //     console.log(acceptedFiles)
     //   }, [])
     // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    
+    const TimeTable = (props) => (
+       props.days.map((day,index) => {
+            return (
+                  <tr key={index}>
+                      
+                     <td >{day}</td>
+                      <td>
+                          {props.from} - {props.to}
+                      </td>
+                  </tr>) 
+                          })          
+    )
+    
+
+    const [time1, setTime1] = useState('12:00 AM');
+    const [time2, setTime2] = useState('12:00 AM');
+    const [checkboxValue, setCheckboxValue] = useState(
+        {
+            monday:'',
+            tuesday:'',
+            wednesday:'',
+            thursday:'',
+            friday:'',
+            saturday:'',
+            sunday:''
+        }
+    )
+    
+    const checkBoxHandler = (e) => {
+        if(e.target.checked === true){
+           setCheckboxValue({
+            ...checkboxValue,
+               [e.target.name] : e.target.checked
+            })
+            // days.push(e.target.name)
+            console.log(days.day.includes(e.target.name))
+            if(!days.day.includes(e.target.name)){
+                days.day.push(e.target.name)
+               
+            } 
+            // else{
+            //     days.from.push(time1)
+            //     days.to.push(time2)
+            // }
+            console.log(days)
+           
+        }
+        if(e.target.checked === false)
+        {
+            setCheckboxValue({
+                ...checkboxValue,
+                [e.target.name] : e.target.checked})
+        }
+    }
+
+    const  handleTimeChangeFrom = (time) => {
+        // console.log(timeFromInt(time, { format: 12 }))
+        setTime1(timeFromInt(time, { format: 12 }));
+       if(!days.from.includes(time)){
+        days.from.push(time1)
+       } else{
+        days.from.push(time1)
+       }
+        console.log( days.from)
+      }
+    const handleTimeChangeTo = (time) => {
+        setTime2(timeFromInt(time, { format: 12 }));
+        if(!days.from.includes(time)){
+            days.to.push(time2)
+           } else{
+            days.to.push(time2)
+           }
+           console.log( days.to)
+    }
+   
+   //This function is called when the user clicks Add time button. 
+//    Here we are passsing days, from and to as props to TimeTable component
+    const  [businessTiming, setbusinessTiming]= useState([])
+    const addBusinessTimeHandler = () => {
+        // return Object.keys(days.day).map
+        return Object.keys(days.day).map(
+            (day, index )=> {
+               return  setbusinessTiming([
+                    <TimeTable key={index} days = {day} from={days.from} to={days.to}/>])
+            }
+        )
+      
+                // console.log(days.map(day =>{ return day}))
+    }
     const onSubmit = async (e) => {
        
         console.log(1)
@@ -168,19 +265,154 @@ const RestaurantForm =()=> {
                                     {errors.website && <p className='error'>{errors.website}</p>}
                                     </div>
                                 </div>
+                                <h4 className='form-section'>
+                                <i className="fas fa-business-time"></i>
+                                Business Hours
+                                </h4>
                                 <div className='form-group row'>
-                                <label className='col-md-3 label-control'>Opening hours</label>
+                                <label className='col-md-3 label-control'>Day</label>
+                                <div className='col-md-9'> 
+                                <div>
+                                    <label className='checkboxlabel'>
+                                    Monday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='monday'
+                                        value='monday'
+                                        checked={checkboxValue.monday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                </div>
+                                <div>
+                                    <label className='checkboxlabel'>
+                                   Tuesday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='tuesday'
+                                        value='tuesday'
+                                        checked={checkboxValue.tuesday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                </div>
+                                <div>
+                                    <label className='checkboxlabel'>
+                                   Wednesday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='wednesday'
+                                        value='wednesday'
+                                        checked={checkboxValue.wednesday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                </div>
+                                <div>
+                                    <label className='checkboxlabel'>
+                                   Thursday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='thursday'
+                                        value='thursday'
+                                        checked={checkboxValue.thursday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                </div>
+                                <div>
+                                    <label className='checkboxlabel'>
+                                   Friday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='friday'
+                                        value='friday'
+                                        checked={checkboxValue.friday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                </div>
+                                <div>
+                                    <label className='checkboxlabel'>
+                                   Saturday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='saturday'
+                                        value='saturday'
+                                        checked={checkboxValue.saturday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                </div>
+                                <div>
+                                    <label className='checkboxlabel'>
+                                   Sunday
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='sunday'
+                                        value='sunday'
+                                        checked={checkboxValue.sunday}
+                                        onChange={checkBoxHandler}
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label> 
+                                    </div> 
+                                </div>
+                                
+                                </div>
+                                
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Open From</label>
+                                    <div className='col-md-9 time-picker'>
+                                    <TimePicker name = 'from' onChange={handleTimeChangeFrom } value={time1} />    
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Closing at</label>
+                                    <div className='col-md-9 time-picker'>
+                                    <TimePicker id = 'to' onChange={handleTimeChangeTo} value={time2} />    
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'></label>
+                                <div className='col-md-9'>
+                                <Link onClick={addBusinessTimeHandler} className='btn btn-add'>Add Time</Link> 
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'></label>
+                                    <table className='table table-bordered mb-0'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Day</th>
+                                                    <th>Time</th>
+                                                </tr>
+                                            </thead>
+                                        <tbody>
+                                        {businessTiming}
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                                    </div>
+                                </div>
+                               
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Additional Notes</label>
                                     <div className='col-md-9'>
-                                        <input type='text' className='form-control' placeholder='Opening hours'
+                                        <textarea className='form-control' placeholder='Eg: closed on public holidays'
                                         name='openinghours'
                                         value={values.openinghours}
                                         onChange={onChange}/>
                                     {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
                                     </div>
                                 </div>
-
                                 <h4 className='form-section'>
-                                <i class="fas fa-align-justify"></i>
+                                <i className="fas fa-align-justify"></i>
                                 About your Restaurant
                                 </h4>
                                 <div className='form-group row'>
@@ -196,101 +428,147 @@ const RestaurantForm =()=> {
 
 
                                 <h4 className='form-section'>
-                                <i class="fas fa-concierge-bell"></i>
+                                <i className="fas fa-concierge-bell"></i>
                                 Services
                                 </h4>
                                 
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Alcohol</label>
                                 <div className='col-md-9'> 
-                                <div className='input-group'>
-                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                <div>
+                                <label className='radiolabel'>
+                                  Yes
+                                    <small></small>
                                         <input type='radio' className='custom-control-input'
-                                        name='yes'
-                                        checked
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Yes</label>
-                                        </div>
-                                        
-                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                        name='alcohol'
+                                        value='yes'
+                                        /> 
+                                       <span className='radio'></span> 
+                                    </label>     
+                                    <label className='radiolabel'>
+                                  No
+                                    <small></small>
                                         <input type='radio' className='custom-control-input'
-                                        name='yes'
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>No</label>
-                                        </div>
-                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
-                                    </div>     
+                                        name='alcohol'
+                                        value='no'
+                                        /> 
+                                       <span className='radio'></span> 
+                                    </label>   
+                                </div>     
                                 </div>  
                                 </div>
                                 <div className='form-group row'>
+                                <label className='col-md-3 label-control'>BYOD</label>
+                                <div className='col-md-9'> 
+                                <div>
+                                <label className='radiolabel'>
+                                  Yes
+                                    <small></small>
+                                        <input type='radio' className='custom-control-input'
+                                        name='byod'
+                                        value='yes'
+                                        /> 
+                                       <span className='radio'></span> 
+                                    </label>     
+                                    <label className='radiolabel'>
+                                  No
+                                    <small></small>
+                                        <input type='radio' className='custom-control-input'
+                                        name='byod'
+                                        value='no'
+                                        /> 
+                                       <span className='radio'></span> 
+                                    </label>   
+                                </div>     
+                                </div>  
+                                </div>
+                                
+                                <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Meals</label>
                                 <div className='col-md-9'> 
-                                <div className='input-group'>
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                
+                                <label className='checkboxlabel'>
+                                  Breakfast
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        checked
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Breakfast</label>
-                                        </div>
-                                        
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        name='meals'
+                                        value='breakfast'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                   
+                                <label className='checkboxlabel'>
+                                 Lunch
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Lunch</label>
-                                        </div>
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        name='meals'
+                                        value='lunch'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                  
+                                   
+                                <label className='checkboxlabel'>
+                                  Dinner
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Dinner</label>
-                                        </div>
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        name='meals'
+                                        value='dinner'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>    
+                                    <label className='checkboxlabel'>
+                                  Cafe
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Dessert</label>
-                                        </div>
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        name='meals'
+                                        value='cafe'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>  
+                                    <label className='checkboxlabel'>
+                                  Dessert
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Cafe</label>
-                                        </div>
-                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
-                                    </div>   
+                                        name='meals'
+                                        value='dessert'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label>  
+                                  
                                 </div>
                                    
                                 </div>
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Restaurant Type</label>
                                 <div className='col-md-9'> 
-                                <div className='input-group'>
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                <label className='checkboxlabel'>
+                                  Dine-in
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        checked
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Dine-in</label>
-                                        </div>
-                                        <div className='d-inline-block custom-control custom-checkbox mr-1'>
+                                        name='resttype'
+                                        value='dinein'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label> 
+                                    <label className='checkboxlabel'>
+                                  Takeaway
+                                    <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='yes'
-                                        
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Takeaway</label>
-                                        </div>
-                                </div>
+                                        name='resttype'
+                                        value='takeaway'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label> 
+                                    <label className='checkboxlabel'>
+                                  Drive-thru
+                                    <small></small>
+                                        <input type='checkbox' className='custom-control-input'
+                                        name='resttype'
+                                        value='drivethru'
+                                        /> 
+                                       <span className='check'></span> 
+                                    </label> 
                                 </div>
                                 </div>
                                 <div className='form-group row'>
@@ -304,7 +582,7 @@ const RestaurantForm =()=> {
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
-                                <i class="fas fa-pizza-slice"></i>
+                                <i className="fas fa-pizza-slice"></i>
                                 Type of Cuisine
                                 </h4>
                                 <div className='form-group row'>
@@ -323,31 +601,32 @@ const RestaurantForm =()=> {
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
-                                <i class="fas fa-address-book"></i>
+                                <i className="fas fa-address-book"></i>
                                 Reservation Info
                                 </h4>
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Is Booking available?</label>
                                 <div className='col-md-9'> 
                                 <div className='input-group'>
-                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                <label className='radiolabel'>
+                                  Yes
+                                    <small></small>
                                         <input type='radio' className='custom-control-input'
-                                        name='yes'
-                                        checked
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>Yes</label>
-                                        </div>
-                                        
-                                        <div className='d-inline-block custom-control custom-radio mr-1'>
+                                        name='booking'
+                                        value='yes'
+                                        /> 
+                                       <span className='radio'></span> 
+                                    </label>     
+                                    <label className='radiolabel'>
+                                  No
+                                    <small></small>
                                         <input type='radio' className='custom-control-input'
-                                        name='yes'
-                                        value={values.delivery}
-                                        onChange={onChange}/> 
-                                        <label className='custom-control-label'>No</label>
-                                        </div>
-                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
-                                    </div>   
+                                        name='booking'
+                                        value='no'
+                                        /> 
+                                       <span className='radio'></span> 
+                                    </label>   
+                                </div>     
                                 </div>
                                    
                                 </div>
@@ -372,7 +651,7 @@ const RestaurantForm =()=> {
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
-                                <i class="fas fa-car"></i>
+                                <i className="fas fa-car"></i>
                                  Delivery Service Info
                                 </h4>
                             <div className='form-group row'>
@@ -407,7 +686,7 @@ const RestaurantForm =()=> {
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
-                                <i class="fas fa-cloud-upload-alt"></i>
+                                <i className="fas fa-cloud-upload-alt"></i>
                                 Upload Logo and Food images
                                 </h4>
                                 <div className='form-group row'>
@@ -430,7 +709,26 @@ const RestaurantForm =()=> {
                                     </div>
                                 </div>
                                 <div className='form-group row'>
-                                <label className='col-md-3 label-control'>Select Food images</label>
+                                <label className='col-md-3 label-control'>Upload Food Images</label>
+                                    <div className='col-md-9'>
+                                        {/* <FileUpload /> */}
+                                        <input type='file' 
+                                        className='fileinput' 
+                                        onChange={onChange}
+                                        multiple/>
+                                        {/* <div {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        {
+                                            isDragActive ?
+                                            <p>Drop the files here ...</p> :
+                                            <p>Drag 'n' drop some files here, or click to select files</p>
+                                        }
+                                        </div> */}
+                                    {errors.addfiles && <p className='error'>{errors.addfiles}</p>}
+                                    </div>
+                                </div>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Upload Menu</label>
                                     <div className='col-md-9'>
                                         {/* <FileUpload /> */}
                                         <input type='file' 
@@ -470,12 +768,7 @@ const RestaurantForm =()=> {
            
         )  
 }
-// RestaurantForm.propTypes = {
-//     addItems: PropTypes.func.isRequired,
-//     item: PropTypes.object.isRequired
-// }
 const mapStatetoProps = (state) => ({
     item: state.item
 })
-// console.log(mapStatetoProps)
 export default connect(mapStatetoProps, {addItems})(RestaurantForm)
