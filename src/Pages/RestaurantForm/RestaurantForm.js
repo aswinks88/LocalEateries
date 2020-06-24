@@ -11,32 +11,64 @@ import TimePicker from 'react-bootstrap-time-picker';
 import { timeFromInt } from 'time-number'
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
-const days = {
-    day: [],
-    from:[],
-    to:[]
+const businessHours = {
+    time:[]
 }
+const days = {
+   time: {
+        day: [],
+        from:[],
+        to:[]
+        }
+}
+
 // const from = []
-const RestaurantForm =()=> {
+const RestaurantForm = () => {
     // const [file, setFile] = useState('')
     // const onDrop = useCallback(acceptedFiles => {
     //     // Do something with the files
     //     console.log(acceptedFiles)
     //   }, [])
     // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    const TimeTable = (props) =>{
+         console.log( props.data.time.map((data, index) => {
+            if(data.day==='monday'){
+                return data.time.map(from=>{
+                    return from
+                })
+            }
+        }), props)
+  
+      //   return  props.data.time.map((data,index) => {
+              
+      //                 return <tr key={index}>
+                        
+      //                   <td >{data.day}</td>
+      //                   {data.day==='monday' ? <td>
+                             
+      //                        {data.time.from} - {data.time.to}
+      //                    </td> : ''}
+                         
+      //                </tr>
+      //                       })  
+                    return  props.data.time.map((data,index) => {
+                        return     <tr key={index}>
+                                        <td >{data.day}</td>
+                                        <td>        
+                                            {data.time.map((time,index) => {
+                                                return `${time.from} - ${time.to} ,`
+                                            })}
+                                        </td>    
+                                        <td>remove</td>
+                                    </tr>    
+                    })    
+                     
+                    //    {props.data.time[0].time.from} - {props.data.time[0].time.to}
+    }
+       
+  
     
-    const TimeTable = (props) => (
-       props.days.map((day,index) => {
-            return (
-                  <tr key={index}>
-                      
-                     <td >{day}</td>
-                      <td>
-                          {props.from} - {props.to}
-                      </td>
-                  </tr>) 
-                          })          
-    )
+     
     
 
     const [time1, setTime1] = useState('12:00 AM');
@@ -59,60 +91,124 @@ const RestaurantForm =()=> {
             ...checkboxValue,
                [e.target.name] : e.target.checked
             })
-            // days.push(e.target.name)
-            console.log(days.day.includes(e.target.name))
-            if(!days.day.includes(e.target.name)){
-                days.day.push(e.target.name)
-               
-            } 
-            // else{
-            //     days.from.push(time1)
-            //     days.to.push(time2)
-            // }
-            console.log(days)
            
+            if(!days.time.day.includes(e.target.value)){
+                days.time.day.push(e.target.name)
+                businessHours.time.push({isChecked: e.target.checked, day: e.target.name})
+                // console.log( businessHours)
+            } else {
+                for(let i = 0; i<businessHours.time.length; i++){
+                    if(businessHours.time[i].day === e.target.value){
+                        businessHours.time[i].isChecked = e.target.checked
+                    }
+                }
+            }
+            // console.log(days.time.day,businessHours)
         }
         if(e.target.checked === false)
         {
             setCheckboxValue({
                 ...checkboxValue,
                 [e.target.name] : e.target.checked})
+                if(days.time.day.includes(e.target.value)){
+                    for(let i = 0; i<businessHours.time.length; i++){
+                        if(businessHours.time[i].day === e.target.value){
+                            businessHours.time[i].isChecked = e.target.checked
+                        }
+                    }
+                    // console.log(businessHours)
+                }
         }
+        // console.log( businessHours)
     }
 
     const  handleTimeChangeFrom = (time) => {
-        // console.log(timeFromInt(time, { format: 12 }))
-        setTime1(timeFromInt(time, { format: 12 }));
-       if(!days.from.includes(time)){
-        days.from.push(time1)
-       } else{
-        days.from.push(time1)
-       }
-        console.log( days.from)
+        setTime1(
+            timeFromInt(time, { format: 12 }))
       }
     const handleTimeChangeTo = (time) => {
-        setTime2(timeFromInt(time, { format: 12 }));
-        if(!days.from.includes(time)){
-            days.to.push(time2)
-           } else{
-            days.to.push(time2)
-           }
-           console.log( days.to)
+        setTime2(
+            timeFromInt(time, { format: 12 }));
+        //    console.log(...time2)
     }
    
    //This function is called when the user clicks Add time button. 
 //    Here we are passsing days, from and to as props to TimeTable component
-    const  [businessTiming, setbusinessTiming]= useState([])
+    const  [businessTiming, setbusinessTiming]= useState()
     const addBusinessTimeHandler = () => {
-        // return Object.keys(days.day).map
-        return Object.keys(days.day).map(
-            (day, index )=> {
-               return  setbusinessTiming([
-                    <TimeTable key={index} days = {day} from={days.from} to={days.to}/>])
+        businessHours.time.map((data, index) => {
+            if(data.day === 'monday' && data.isChecked === true){
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
             }
-        )
-      
-                // console.log(days.map(day =>{ return day}))
+            if(data.day === 'tuesday' && data.isChecked === true){
+                
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
+            }
+            if(data.day === 'wednesday' && data.isChecked === true){
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
+            }
+            if(data.day === 'thursday' && data.isChecked === true){
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
+            }
+            if(data.day === 'friday' && data.isChecked === true){
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
+            }
+            if(data.day === 'saturday' && data.isChecked === true){
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
+            }
+            if(data.day === 'sunday' && data.isChecked === true){
+                if(data.time === undefined){
+                    data.time = [{from: time1, to:time2}]
+                } 
+                else{
+                    data.time.push({from: time1, to:time2})
+                }
+            }
+            // return setbusinessTiming(
+            //     <TimeTable propsDate={data}/>
+            //     )
+            // return console.log(1, data, index)
+        })
+    console.log(businessHours)
+        // return Object.keys(days.day).map
+        // return Object.keys(days.time.day).map(
+        //     (day, index )=> {
+                
+               return  setbusinessTiming(
+                    <TimeTable data={businessHours} />
+                    )
+        //     }
+        // )
     }
     const onSubmit = async (e) => {
        
@@ -386,12 +482,12 @@ const RestaurantForm =()=> {
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'></label>
                                     <table className='table table-bordered mb-0'>
-                                            <thead>
+                                            {/* <thead>
                                                 <tr>
                                                     <th>Day</th>
                                                     <th>Time</th>
                                                 </tr>
-                                            </thead>
+                                            </thead> */}
                                         <tbody>
                                         {businessTiming}
                                         </tbody>

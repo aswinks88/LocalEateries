@@ -131,7 +131,7 @@ form .form-control {
     display: block;
 }
 .checkboxlabel .check:after {
-    left: 7px;
+    left: 6px;
     top: 0px;
     width: 8px;
     height: 14px;

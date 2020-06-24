@@ -57,11 +57,11 @@ import Logout from '../../Pages/Auth/Logout'
         //nav links or anywhere on the >menu-item
         const hamburger = document.querySelector('.toggleham')
         const checkbox = document.querySelector('.menu-item')
-        console.log(hamburger)
+       
         
         checkbox.addEventListener('click', () => {
             checkbox.style.visibility = 'hidden'
-            console.log(checkbox)
+            
             this.setState({
                 checked: false
             })
