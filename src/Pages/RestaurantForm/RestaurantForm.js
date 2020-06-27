@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import useForm from '../../customhooks/useForm'
 import './RestaurantForm.css'
 import axios from 'axios'
@@ -11,9 +11,10 @@ import TimePicker from 'react-bootstrap-time-picker';
 import { timeFromInt } from 'time-number'
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
-const businessHours = {
+const businessHours ={
     time:[]
 }
+
 const days = {
    time: {
         day: [],
@@ -24,55 +25,10 @@ const days = {
 
 // const from = []
 const RestaurantForm = () => {
-    // const [file, setFile] = useState('')
-    // const onDrop = useCallback(acceptedFiles => {
-    //     // Do something with the files
-    //     console.log(acceptedFiles)
-    //   }, [])
-    // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-    const TimeTable = (props) =>{
-         console.log( props.data.time.map((data, index) => {
-            if(data.day==='monday'){
-                return data.time.map(from=>{
-                    return from
-                })
-            }
-        }), props)
-  
-      //   return  props.data.time.map((data,index) => {
-              
-      //                 return <tr key={index}>
-                        
-      //                   <td >{data.day}</td>
-      //                   {data.day==='monday' ? <td>
-                             
-      //                        {data.time.from} - {data.time.to}
-      //                    </td> : ''}
-                         
-      //                </tr>
-      //                       })  
-                    return  props.data.time.map((data,index) => {
-                        return     <tr key={index}>
-                                        <td >{data.day}</td>
-                                        <td>        
-                                            {data.time.map((time,index) => {
-                                                return `${time.from} - ${time.to} ,`
-                                            })}
-                                        </td>    
-                                        <td>remove</td>
-                                    </tr>    
-                    })    
-                     
-                    //    {props.data.time[0].time.from} - {props.data.time[0].time.to}
-    }
-       
-  
-    
-     
-    
-
     const [time1, setTime1] = useState('12:00 AM');
     const [time2, setTime2] = useState('12:00 AM');
+    const  [businessTiming, setbusinessTiming]= useState([])
+    const [check, setCheck] = useState()
     const [checkboxValue, setCheckboxValue] = useState(
         {
             monday:'',
@@ -85,17 +41,53 @@ const RestaurantForm = () => {
         }
     )
     
+    // const [file, setFile] = useState('')
+    // const onDrop = useCallback(acceptedFiles => {
+    //     // Do something with the files
+    //     console.log(acceptedFiles)
+    //   }, [])
+    // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    // useEffect(() => {
+    //     hoursList() 
+    // },[])
+    const TimeTable = (props) =>{
+    return  props.data.time.map((data,index) => {
+                return     <tr key={index}>
+                                <td >{data.day}</td>
+                                <td>        
+                                    {data.time.map((time,index) => {
+                                        return `${time.from} - ${time.to} ,`
+                                    })}
+                                </td>   
+                                <td><p className='removeRow' onClick={() => removeData(index, data.day)}>Remove</p></td> 
+                            </tr>    
+            })     
+                     
+    }
+       
+  
+    const removeData = (index, day) => {
+    const newArray = Object.assign([], businessHours)
+    newArray.time.splice(index, 1)
+    if(days.time.day.includes(day))
+    {
+       let dayIndex = days.time.day.indexOf(day)
+       days.time.day.splice(dayIndex, 1)
+    }
+    setbusinessTiming(<TimeTable data={newArray} />)
+    }
+
     const checkBoxHandler = (e) => {
+        setCheck(e.target.checked)
         if(e.target.checked === true){
            setCheckboxValue({
             ...checkboxValue,
                [e.target.name] : e.target.checked
             })
-           
+            
             if(!days.time.day.includes(e.target.value)){
                 days.time.day.push(e.target.name)
                 businessHours.time.push({isChecked: e.target.checked, day: e.target.name})
-                // console.log( businessHours)
             } else {
                 for(let i = 0; i<businessHours.time.length; i++){
                     if(businessHours.time[i].day === e.target.value){
@@ -103,7 +95,7 @@ const RestaurantForm = () => {
                     }
                 }
             }
-            // console.log(days.time.day,businessHours)
+           
         }
         if(e.target.checked === false)
         {
@@ -115,11 +107,9 @@ const RestaurantForm = () => {
                         if(businessHours.time[i].day === e.target.value){
                             businessHours.time[i].isChecked = e.target.checked
                         }
-                    }
-                    // console.log(businessHours)
+                    } 
                 }
         }
-        // console.log( businessHours)
     }
 
     const  handleTimeChangeFrom = (time) => {
@@ -129,30 +119,34 @@ const RestaurantForm = () => {
     const handleTimeChangeTo = (time) => {
         setTime2(
             timeFromInt(time, { format: 12 }));
-        //    console.log(...time2)
     }
    
    //This function is called when the user clicks Add time button. 
 //    Here we are passsing days, from and to as props to TimeTable component
-    const  [businessTiming, setbusinessTiming]= useState()
+   
     const addBusinessTimeHandler = () => {
         businessHours.time.map((data, index) => {
             if(data.day === 'monday' && data.isChecked === true){
+                console.log('hit')
                 if(data.time === undefined){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({monday: !check})
+                data.isChecked = false
             }
             if(data.day === 'tuesday' && data.isChecked === true){
-                
+                console.log('hit')
                 if(data.time === undefined){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({tuesday:!check})
+                data.isChecked = false
             }
             if(data.day === 'wednesday' && data.isChecked === true){
                 if(data.time === undefined){
@@ -161,6 +155,8 @@ const RestaurantForm = () => {
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({wednesday:!check})
+                data.isChecked = false
             }
             if(data.day === 'thursday' && data.isChecked === true){
                 if(data.time === undefined){
@@ -169,6 +165,8 @@ const RestaurantForm = () => {
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({thursday:!check})
+                data.isChecked = false
             }
             if(data.day === 'friday' && data.isChecked === true){
                 if(data.time === undefined){
@@ -177,6 +175,8 @@ const RestaurantForm = () => {
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({friday:!check})
+                data.isChecked = false
             }
             if(data.day === 'saturday' && data.isChecked === true){
                 if(data.time === undefined){
@@ -185,6 +185,8 @@ const RestaurantForm = () => {
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({saturday:!check})
+                data.isChecked = false
             }
             if(data.day === 'sunday' && data.isChecked === true){
                 if(data.time === undefined){
@@ -193,22 +195,14 @@ const RestaurantForm = () => {
                 else{
                     data.time.push({from: time1, to:time2})
                 }
+                setCheckboxValue({sunday:!check})
+                data.isChecked = false
             }
-            // return setbusinessTiming(
-            //     <TimeTable propsDate={data}/>
-            //     )
-            // return console.log(1, data, index)
-        })
-    console.log(businessHours)
-        // return Object.keys(days.day).map
-        // return Object.keys(days.time.day).map(
-        //     (day, index )=> {
-                
-               return  setbusinessTiming(
-                    <TimeTable data={businessHours} />
-                    )
-        //     }
-        // )
+            if(data.isChecked === false){
+               return data.time
+            }
+        })      
+                return setbusinessTiming( <TimeTable data={businessHours} />)
     }
     const onSubmit = async (e) => {
        
@@ -478,7 +472,7 @@ const RestaurantForm = () => {
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'></label>
                                 <div className='col-md-9'>
-                                <Link onClick={addBusinessTimeHandler} className='btn btn-add'>Add Time</Link> 
+                                <button type='button' onClick={addBusinessTimeHandler} className='btn btn-add'>Add Time</button> 
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'></label>
                                     <table className='table table-bordered mb-0'>

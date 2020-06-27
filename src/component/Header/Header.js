@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Header.css'
 import {Link} from 'react-router-dom'
-import Logout from '../../Pages/Auth/Logout'
+// import Logout from '../../Pages/Auth/Logout'
  class Header extends Component {
     constructor(props){
         super(props)

@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
-import { timeFromInt } from 'time-number'
+// import { timeFromInt } from 'time-number'
 const useForm = (callbkfn, ValidateForm) => {
     const [useFile, setFile] = useState({ addfiles: ''})
-    const [time, setTime] = useState({
-        from:'',
-        to:''
-    })
+    // const [time, setTime] = useState({
+    //     from:'',
+    //     to:''
+    // })
     const [values, setValues] = useState({name: '',
     street: '',
     suburb: '',

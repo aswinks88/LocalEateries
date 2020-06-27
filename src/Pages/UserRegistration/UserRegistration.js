@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React from 'react'
 import useForm from '../../customhooks/useLogin'
 import './UserRegistration.css'
 import {Link} from 'react-router-dom'
