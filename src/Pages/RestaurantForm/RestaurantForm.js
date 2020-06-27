@@ -17,9 +17,7 @@ const businessHours ={
 
 const days = {
    time: {
-        day: [],
-        from:[],
-        to:[]
+        day: []
         }
 }
 
@@ -55,11 +53,12 @@ const RestaurantForm = () => {
                 return     <tr key={index}>
                                 <td >{data.day}</td>
                                 <td>        
-                                    {data.time.map((time,index) => {
+                                    {data.time === 'CLOSED' ? 'CLOSED' : data.time.map((time,index) => {
                                         return `${time.from} - ${time.to} ,`
                                     })}
                                 </td>   
                                 <td><p className='removeRow' onClick={() => removeData(index, data.day)}>Remove</p></td> 
+                                <td><p className='closed' onClick={() => closed(data.day)}>Mark as Closed</p></td> 
                             </tr>    
             })     
                      
@@ -76,7 +75,15 @@ const RestaurantForm = () => {
     }
     setbusinessTiming(<TimeTable data={newArray} />)
     }
-
+    const closed = (day) => {
+        
+        for(let i=0; i< businessHours.time.length; i++){
+            if(businessHours.time[i].day === day){
+               businessHours.time[i].time = 'CLOSED'
+            }
+        }
+        setbusinessTiming(<TimeTable data={businessHours} />)
+    }
     const checkBoxHandler = (e) => {
         setCheck(e.target.checked)
         if(e.target.checked === true){
@@ -127,8 +134,7 @@ const RestaurantForm = () => {
     const addBusinessTimeHandler = () => {
         businessHours.time.map((data, index) => {
             if(data.day === 'monday' && data.isChecked === true){
-                console.log('hit')
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -138,8 +144,7 @@ const RestaurantForm = () => {
                 data.isChecked = false
             }
             if(data.day === 'tuesday' && data.isChecked === true){
-                console.log('hit')
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -149,7 +154,7 @@ const RestaurantForm = () => {
                 data.isChecked = false
             }
             if(data.day === 'wednesday' && data.isChecked === true){
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -159,7 +164,7 @@ const RestaurantForm = () => {
                 data.isChecked = false
             }
             if(data.day === 'thursday' && data.isChecked === true){
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -169,7 +174,7 @@ const RestaurantForm = () => {
                 data.isChecked = false
             }
             if(data.day === 'friday' && data.isChecked === true){
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -179,7 +184,7 @@ const RestaurantForm = () => {
                 data.isChecked = false
             }
             if(data.day === 'saturday' && data.isChecked === true){
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -189,7 +194,7 @@ const RestaurantForm = () => {
                 data.isChecked = false
             }
             if(data.day === 'sunday' && data.isChecked === true){
-                if(data.time === undefined){
+                if(data.time === undefined || data.time === 'CLOSED'){
                     data.time = [{from: time1, to:time2}]
                 } 
                 else{
@@ -205,8 +210,6 @@ const RestaurantForm = () => {
                 return setbusinessTiming( <TimeTable data={businessHours} />)
     }
     const onSubmit = async (e) => {
-       
-        console.log(1)
         const restaurantData = {
             name: values.name,
             address: {

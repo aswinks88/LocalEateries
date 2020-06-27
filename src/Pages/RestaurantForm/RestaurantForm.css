@@ -203,3 +203,8 @@ form .form-control {
     color: red;
     text-align: center;
 }
+.closed {
+    cursor: pointer;
+    color: blue;
+    text-align: center;
+}
