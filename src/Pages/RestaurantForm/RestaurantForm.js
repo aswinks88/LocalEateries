@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import {addItems} from '../../actions/itemActions'
 import TimePicker from 'react-bootstrap-time-picker';
 import { timeFromInt } from 'time-number'
+import moment from 'moment'
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
 const businessHours ={
@@ -29,13 +30,13 @@ const RestaurantForm = () => {
     const [check, setCheck] = useState()
     const [checkboxValue, setCheckboxValue] = useState(
         {
-            monday:'',
-            tuesday:'',
-            wednesday:'',
-            thursday:'',
-            friday:'',
-            saturday:'',
-            sunday:''
+            Monday:'',
+            Tuesday:'',
+            Wednesday:'',
+            Thursday:'',
+            Friday:'',
+            Saturday:'',
+            Sunday:''
         }
     )
     
@@ -54,8 +55,8 @@ const RestaurantForm = () => {
                                 <td >{data.day}</td>
                                 <td>        
                                     {data.time === 'CLOSED' ? 'CLOSED' : data.time.map((time,index) => {
-                                        return `${time.from} - ${time.to} ,`
-                                    })}
+                                        return `${time.from} - ${time.to}`.concat(',\t')
+                                    })} &nbsp;
                                 </td>   
                                 <td><p className='removeRow' onClick={() => removeData(index, data.day)}>Remove</p></td> 
                                 <td><p className='closed' onClick={() => closed(data.day)}>Mark as Closed</p></td> 
@@ -133,80 +134,87 @@ const RestaurantForm = () => {
    
     const addBusinessTimeHandler = () => {
         businessHours.time.map((data, index) => {
-            if(data.day === 'monday' && data.isChecked === true){
+            if(data.day === 'Monday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:1, from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({monday: !check})
+                setCheckboxValue({Monday: !check})
                 data.isChecked = false
             }
-            if(data.day === 'tuesday' && data.isChecked === true){
+            if(data.day === 'Tuesday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:2, from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({tuesday:!check})
+                setCheckboxValue({Tuesday:!check})
                 data.isChecked = false
             }
-            if(data.day === 'wednesday' && data.isChecked === true){
+            if(data.day === 'Wednesday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:3, from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({wednesday:!check})
+                setCheckboxValue({Wednesday:!check})
                 data.isChecked = false
             }
-            if(data.day === 'thursday' && data.isChecked === true){
+            if(data.day === 'Thursday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:4, from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({thursday:!check})
+                setCheckboxValue({Thursday:!check})
                 data.isChecked = false
             }
-            if(data.day === 'friday' && data.isChecked === true){
+            if(data.day === 'Friday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:5, from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({friday:!check})
+                setCheckboxValue({Friday:!check})
                 data.isChecked = false
             }
-            if(data.day === 'saturday' && data.isChecked === true){
+            if(data.day === 'Saturday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:6,from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({saturday:!check})
+                setCheckboxValue({Saturday:!check})
                 data.isChecked = false
             }
-            if(data.day === 'sunday' && data.isChecked === true){
+            if(data.day === 'Sunday' && data.isChecked === true){
                 if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{from: time1, to:time2}]
+                    data.time = [{id:7,from: time1, to:time2}]
                 } 
                 else{
                     data.time.push({from: time1, to:time2})
                 }
-                setCheckboxValue({sunday:!check})
+                setCheckboxValue({Sunday:!check})
                 data.isChecked = false
             }
             if(data.isChecked === false){
                return data.time
             }
-        })      
+        })
+   //sorting days of week before passing it to the TimeTable component as props
+      businessHours.time.sort((a, b) => {
+            const day1 = a.time[0].id
+            const day2 = b.time[0].id
+            return (day1 - day2)
+        })
+
                 return setbusinessTiming( <TimeTable data={businessHours} />)
     }
     const onSubmit = async (e) => {
@@ -370,9 +378,9 @@ const RestaurantForm = () => {
                                     Monday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='monday'
-                                        value='monday'
-                                        checked={checkboxValue.monday}
+                                        name='Monday'
+                                        value='Monday'
+                                        checked={checkboxValue.Monday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -383,9 +391,9 @@ const RestaurantForm = () => {
                                    Tuesday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='tuesday'
-                                        value='tuesday'
-                                        checked={checkboxValue.tuesday}
+                                        name='Tuesday'
+                                        value='Tuesday'
+                                        checked={checkboxValue.Tuesday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -396,9 +404,9 @@ const RestaurantForm = () => {
                                    Wednesday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='wednesday'
-                                        value='wednesday'
-                                        checked={checkboxValue.wednesday}
+                                        name='Wednesday'
+                                        value='Wednesday'
+                                        checked={checkboxValue.Wednesday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -409,9 +417,9 @@ const RestaurantForm = () => {
                                    Thursday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='thursday'
-                                        value='thursday'
-                                        checked={checkboxValue.thursday}
+                                        name='Thursday'
+                                        value='Thursday'
+                                        checked={checkboxValue.Thursday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -422,9 +430,9 @@ const RestaurantForm = () => {
                                    Friday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='friday'
-                                        value='friday'
-                                        checked={checkboxValue.friday}
+                                        name='Friday'
+                                        value='Friday'
+                                        checked={checkboxValue.Friday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -435,9 +443,9 @@ const RestaurantForm = () => {
                                    Saturday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='saturday'
-                                        value='saturday'
-                                        checked={checkboxValue.saturday}
+                                        name='Saturday'
+                                        value='Saturday'
+                                        checked={checkboxValue.Saturday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -448,9 +456,9 @@ const RestaurantForm = () => {
                                    Sunday
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='sunday'
-                                        value='sunday'
-                                        checked={checkboxValue.sunday}
+                                        name='Sunday'
+                                        value='Sunday'
+                                        checked={checkboxValue.Sunday}
                                         onChange={checkBoxHandler}
                                         /> 
                                        <span className='check'></span> 
@@ -476,7 +484,7 @@ const RestaurantForm = () => {
                                 <label className='col-md-3 label-control'></label>
                                 <div className='col-md-9'>
                                 <button type='button' onClick={addBusinessTimeHandler} className='btn btn-add'>Add Time</button> 
-                                <div className='form-group row'>
+                                <div className='form-group'>
                                 <label className='col-md-3 label-control'></label>
                                     <table className='table table-bordered mb-0'>
                                             {/* <thead>
