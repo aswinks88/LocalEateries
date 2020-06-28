@@ -8,38 +8,14 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addItems} from '../../actions/itemActions'
 import TimePicker from 'react-bootstrap-time-picker';
-import { timeFromInt } from 'time-number'
-import moment from 'moment'
+
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
-const businessHours ={
-    time:[]
-}
 
-const days = {
-   time: {
-        day: []
-        }
-}
 
 // const from = []
 const RestaurantForm = () => {
-    const [time1, setTime1] = useState('12:00 AM');
-    const [time2, setTime2] = useState('12:00 AM');
-    const  [businessTiming, setbusinessTiming]= useState([])
-    const [check, setCheck] = useState()
-    const [checkboxValue, setCheckboxValue] = useState(
-        {
-            Monday:'',
-            Tuesday:'',
-            Wednesday:'',
-            Thursday:'',
-            Friday:'',
-            Saturday:'',
-            Sunday:''
-        }
-    )
-    
+   
     // const [file, setFile] = useState('')
     // const onDrop = useCallback(acceptedFiles => {
     //     // Do something with the files
@@ -49,174 +25,7 @@ const RestaurantForm = () => {
     // useEffect(() => {
     //     hoursList() 
     // },[])
-    const TimeTable = (props) =>{
-    return  props.data.time.map((data,index) => {
-                return     <tr key={index}>
-                                <td >{data.day}</td>
-                                <td>        
-                                    {data.time === 'CLOSED' ? 'CLOSED' : data.time.map((time,index) => {
-                                        return `${time.from} - ${time.to}`.concat(',\t')
-                                    })} &nbsp;
-                                </td>   
-                                <td><p className='removeRow' onClick={() => removeData(index, data.day)}>Remove</p></td> 
-                                <td><p className='closed' onClick={() => closed(data.day)}>Mark as Closed</p></td> 
-                            </tr>    
-            })     
-                     
-    }
-       
-  
-    const removeData = (index, day) => {
-    const newArray = Object.assign([], businessHours)
-    newArray.time.splice(index, 1)
-    if(days.time.day.includes(day))
-    {
-       let dayIndex = days.time.day.indexOf(day)
-       days.time.day.splice(dayIndex, 1)
-    }
-    setbusinessTiming(<TimeTable data={newArray} />)
-    }
-    const closed = (day) => {
-        
-        for(let i=0; i< businessHours.time.length; i++){
-            if(businessHours.time[i].day === day){
-               businessHours.time[i].time = 'CLOSED'
-            }
-        }
-        setbusinessTiming(<TimeTable data={businessHours} />)
-    }
-    const checkBoxHandler = (e) => {
-        setCheck(e.target.checked)
-        if(e.target.checked === true){
-           setCheckboxValue({
-            ...checkboxValue,
-               [e.target.name] : e.target.checked
-            })
-            
-            if(!days.time.day.includes(e.target.value)){
-                days.time.day.push(e.target.name)
-                businessHours.time.push({isChecked: e.target.checked, day: e.target.name})
-            } else {
-                for(let i = 0; i<businessHours.time.length; i++){
-                    if(businessHours.time[i].day === e.target.value){
-                        businessHours.time[i].isChecked = e.target.checked
-                    }
-                }
-            }
-           
-        }
-        if(e.target.checked === false)
-        {
-            setCheckboxValue({
-                ...checkboxValue,
-                [e.target.name] : e.target.checked})
-                if(days.time.day.includes(e.target.value)){
-                    for(let i = 0; i<businessHours.time.length; i++){
-                        if(businessHours.time[i].day === e.target.value){
-                            businessHours.time[i].isChecked = e.target.checked
-                        }
-                    } 
-                }
-        }
-    }
 
-    const  handleTimeChangeFrom = (time) => {
-        setTime1(
-            timeFromInt(time, { format: 12 }))
-      }
-    const handleTimeChangeTo = (time) => {
-        setTime2(
-            timeFromInt(time, { format: 12 }));
-    }
-   
-   //This function is called when the user clicks Add time button. 
-//    Here we are passsing days, from and to as props to TimeTable component
-   
-    const addBusinessTimeHandler = () => {
-        businessHours.time.map((data, index) => {
-            if(data.day === 'Monday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:1, from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Monday: !check})
-                data.isChecked = false
-            }
-            if(data.day === 'Tuesday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:2, from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Tuesday:!check})
-                data.isChecked = false
-            }
-            if(data.day === 'Wednesday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:3, from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Wednesday:!check})
-                data.isChecked = false
-            }
-            if(data.day === 'Thursday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:4, from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Thursday:!check})
-                data.isChecked = false
-            }
-            if(data.day === 'Friday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:5, from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Friday:!check})
-                data.isChecked = false
-            }
-            if(data.day === 'Saturday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:6,from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Saturday:!check})
-                data.isChecked = false
-            }
-            if(data.day === 'Sunday' && data.isChecked === true){
-                if(data.time === undefined || data.time === 'CLOSED'){
-                    data.time = [{id:7,from: time1, to:time2}]
-                } 
-                else{
-                    data.time.push({from: time1, to:time2})
-                }
-                setCheckboxValue({Sunday:!check})
-                data.isChecked = false
-            }
-            if(data.isChecked === false){
-               return data.time
-            }
-        })
-   //sorting days of week before passing it to the TimeTable component as props
-      businessHours.time.sort((a, b) => {
-            const day1 = a.time[0].id
-            const day2 = b.time[0].id
-            return (day1 - day2)
-        })
-
-                return setbusinessTiming( <TimeTable data={businessHours} />)
-    }
     const onSubmit = async (e) => {
         const restaurantData = {
             name: values.name,
@@ -267,7 +76,11 @@ const RestaurantForm = () => {
    
     const {onChange,
         handleSubmit,
-        values, useFile, errors} = useForm(onSubmit, ValidateForm)
+        handleTimeChangeFrom,
+        handleTimeChangeTo,
+        addBusinessTimeHandler,
+        checkBoxHandler,
+        values, checkboxValue, From, To, businessTiming, useFile, errors} = useForm(onSubmit, ValidateForm)
   
         return (
             
@@ -471,13 +284,13 @@ const RestaurantForm = () => {
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Open From</label>
                                     <div className='col-md-9 time-picker'>
-                                    <TimePicker name = 'from' onChange={handleTimeChangeFrom } value={time1} />    
+                                    <TimePicker name = 'from' onChange={handleTimeChangeFrom } value={From} />    
                                     </div>
                                 </div>
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Closing at</label>
                                     <div className='col-md-9 time-picker'>
-                                    <TimePicker id = 'to' onChange={handleTimeChangeTo} value={time2} />    
+                                    <TimePicker id = 'to' onChange={handleTimeChangeTo} value={To} />    
                                     </div>
                                 </div>
                                 <div className='form-group row'>
