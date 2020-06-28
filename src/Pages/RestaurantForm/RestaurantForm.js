@@ -80,6 +80,9 @@ const RestaurantForm = () => {
         handleTimeChangeTo,
         addBusinessTimeHandler,
         checkBoxHandler,
+        handleServices,
+        handleRadio,
+        services,
         values, checkboxValue, From, To, businessTiming, useFile, errors} = useForm(onSubmit, ValidateForm)
   
         return (
@@ -356,6 +359,7 @@ const RestaurantForm = () => {
                                         <input type='radio' className='custom-control-input'
                                         name='alcohol'
                                         value='yes'
+                                        onChange={handleRadio}
                                         /> 
                                        <span className='radio'></span> 
                                     </label>     
@@ -365,6 +369,7 @@ const RestaurantForm = () => {
                                         <input type='radio' className='custom-control-input'
                                         name='alcohol'
                                         value='no'
+                                        onChange={handleRadio}
                                         /> 
                                        <span className='radio'></span> 
                                     </label>   
@@ -381,6 +386,7 @@ const RestaurantForm = () => {
                                         <input type='radio' className='custom-control-input'
                                         name='byod'
                                         value='yes'
+                                        onChange={handleRadio}
                                         /> 
                                        <span className='radio'></span> 
                                     </label>     
@@ -390,6 +396,7 @@ const RestaurantForm = () => {
                                         <input type='radio' className='custom-control-input'
                                         name='byod'
                                         value='no'
+                                        onChange={handleRadio}
                                         /> 
                                        <span className='radio'></span> 
                                     </label>   
@@ -405,8 +412,10 @@ const RestaurantForm = () => {
                                   Breakfast
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='meals'
-                                        value='breakfast'
+                                        name='Breakfast'
+                                        value='Breakfast'
+                                        checked={services.Breakfast}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label>    
@@ -415,8 +424,10 @@ const RestaurantForm = () => {
                                  Lunch
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='meals'
-                                        value='lunch'
+                                        name='Lunch'
+                                        value='Lunch'
+                                        checked={services.Lunch}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label>    
@@ -426,8 +437,10 @@ const RestaurantForm = () => {
                                   Dinner
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='meals'
-                                        value='dinner'
+                                        name='Dinner'
+                                        value='Dinner'
+                                        checked={services.Dinner}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label>    
@@ -435,8 +448,10 @@ const RestaurantForm = () => {
                                   Cafe
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='meals'
-                                        value='cafe'
+                                        name='Cafe'
+                                        value='Cafe'
+                                        checked={services.Cafe}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label>  
@@ -444,8 +459,10 @@ const RestaurantForm = () => {
                                   Dessert
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='meals'
-                                        value='dessert'
+                                        name='Dessert'
+                                        value='Dessert'
+                                        checked={services.Dessert}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label>  
@@ -460,8 +477,10 @@ const RestaurantForm = () => {
                                   Dine-in
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='resttype'
-                                        value='dinein'
+                                        name='Dinein'
+                                        value='Dinein'
+                                        checked={services.Dinein}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label> 
@@ -469,8 +488,10 @@ const RestaurantForm = () => {
                                   Takeaway
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='resttype'
-                                        value='takeaway'
+                                        name='Takeaway'
+                                        value='Takeaway'
+                                        checked={services.Takeaway}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label> 
@@ -478,8 +499,10 @@ const RestaurantForm = () => {
                                   Drive-thru
                                     <small></small>
                                         <input type='checkbox' className='custom-control-input'
-                                        name='resttype'
-                                        value='drivethru'
+                                        name='Drivethru'
+                                        value='Drivethru'
+                                        checked={services.Drivethru}
+                                        onChange={handleServices}
                                         /> 
                                        <span className='check'></span> 
                                     </label> 
@@ -528,6 +551,7 @@ const RestaurantForm = () => {
                                         <input type='radio' className='custom-control-input'
                                         name='booking'
                                         value='yes'
+                                        onChange={handleRadio}
                                         /> 
                                        <span className='radio'></span> 
                                     </label>     
@@ -537,6 +561,7 @@ const RestaurantForm = () => {
                                         <input type='radio' className='custom-control-input'
                                         name='booking'
                                         value='no'
+                                        onChange={handleRadio}
                                         /> 
                                        <span className='radio'></span> 
                                     </label>   

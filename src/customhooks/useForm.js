@@ -11,24 +11,11 @@ const days = {
         }
 }
 const useForm = (callbkfn, ValidateForm) => {
+    const [useFile, setFile] = useState({ addfiles: ''})
     const [From, setFrom] = useState('12:00 AM');
     const [To, setTo] = useState('12:00 AM');
     const  [businessTiming, setbusinessTiming]= useState([])
     const [check, setCheck] = useState()
-    const [checkboxValue, setCheckboxValue] = useState(
-        {
-            Monday:'',
-            Tuesday:'',
-            Wednesday:'',
-            Thursday:'',
-            Friday:'',
-            Saturday:'',
-            Sunday:''
-        }
-    )
-    
-    const [useFile, setFile] = useState({ addfiles: ''})
-  
     const [values, setValues] = useState({name: '',
     street: '',
     suburb: '',
@@ -42,13 +29,45 @@ const useForm = (callbkfn, ValidateForm) => {
     website:'',
     openinghours:'', 
    })
-  
+   const [checkboxValue, setCheckboxValue] = useState(
+       {
+           Monday:'',
+           Tuesday:'',
+           Wednesday:'',
+           Thursday:'',
+           Friday:'',
+           Saturday:'',
+           Sunday:''
+       }
+   )
+   const [services, setServices] = useState({
+       Breakfast: '',
+       Lunch: '',
+       Dinner: '',
+       Cafe: '',
+       Dessert: '',
+       Dinein: '',
+       Takeaway: '',
+       Drivethru: ''
+   })
+const [radio, setRadio] = useState({
+    alcohol: '',
+    byod: '',
+    booking: ''
+})
 //error handling
 const [errors, setErrors] = useState({})
 
-//handling for data
+                                                //handling form data
 
-
+//handling all form radio buttons 
+const handleRadio = (e) => {
+    console.log(e.target.value, e.target.checked, e.target.name)
+    setRadio({
+        ...radio,
+        [e.target.name]: e.target.value
+    })
+}
 //handling business hours
 const TimeTable = (props) =>{
     return  props.data.time.map((data,index) => {
@@ -68,6 +87,7 @@ const TimeTable = (props) =>{
        
   
     const removeData = (index, day) => {
+
     const newArray = Object.assign([], businessHours)
     newArray.time.splice(index, 1)
     if(days.time.day.includes(day))
@@ -76,7 +96,9 @@ const TimeTable = (props) =>{
        days.time.day.splice(dayIndex, 1)
     }
     setbusinessTiming(<TimeTable data={newArray} />)
+
     }
+
     const closed = (day) => {
         
         for(let i=0; i< businessHours.time.length; i++){
@@ -86,6 +108,8 @@ const TimeTable = (props) =>{
         }
         setbusinessTiming(<TimeTable data={businessHours} />)
     }
+
+
     const checkBoxHandler = (e) => {
         setCheck(e.target.checked)
         if(e.target.checked === true){
@@ -125,6 +149,7 @@ const TimeTable = (props) =>{
         setFrom(
             timeFromInt(time, { format: 12 }))
       }
+
     const handleTimeChangeTo = (time) => {
         setTo(
             timeFromInt(time, { format: 12 }));
@@ -218,7 +243,22 @@ const TimeTable = (props) =>{
 
                 return setbusinessTiming( <TimeTable data={businessHours} />)
     }
-
+// Handling services section of the form 
+const handleServices = (e) => {
+    if(e.target.checked === true){
+        setServices(
+           { 
+               ...services,
+            [e.target.name]: e.target.checked
+            })
+    } else {
+        setServices(
+            { 
+                ...services,
+             [e.target.name]: e.target.checked
+             })
+    }
+} 
 
 //handling input fields
 const [isSubmitting, setisSubmitting] = useState(false)
@@ -234,6 +274,8 @@ const [isSubmitting, setisSubmitting] = useState(false)
             addfiles: e.target.files
         })
     }
+
+//Form submission
 const handleSubmit = async (e) => {
     e.preventDefault()
     //handling errors here
@@ -260,6 +302,9 @@ callbkfn()
         removeData,
         closed,
         setbusinessTiming,
+        handleServices,
+        handleRadio,
+        services,
         businessTiming,
         checkboxValue,
         check,
@@ -267,6 +312,7 @@ callbkfn()
         To,
         values,
         useFile, 
+        radio,
         errors
     }
 }
