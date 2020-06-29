@@ -42,7 +42,9 @@ export default function ValidateForm(values, useFile){
     if(!useFile.addfiles){
         errors.addfiles = 'At least one image is required to upload'
     }
-    
+    if(!values.restaurantDesc){
+        errors.restaurantDesc = 'Restaurant description cannot be empty'
+    }
     // if(useFile.addfiles.length > 5){
     //     errors.addfiles = 'You cannot upload more than 5 images'
     // }

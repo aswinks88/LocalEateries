@@ -27,7 +27,13 @@ const useForm = (callbkfn, ValidateForm) => {
     charges: '',
     contactless:'',
     website:'',
-    openinghours:'', 
+    additonalNotes:'', 
+    restaurantDesc: '',
+    seatingCapacity: '',
+    phoneBooking:'',
+    onLine: '',
+    cuisine: '',
+    timing: businessHours
    })
    const [checkboxValue, setCheckboxValue] = useState(
        {
@@ -74,7 +80,7 @@ const TimeTable = (props) =>{
                 return     <tr key={index}>
                                 <td >{data.day}</td>
                                 <td>        
-                                    {data.time === 'CLOSED' ? 'CLOSED' : data.time.map((time,index) => {
+                                    {data.time === 'CLOSED' ? 'CLOSED' : data.time === undefined ? 'No time selected' : data.time.map((time,index) => {
                                         return `${time.from} - ${time.to}`.concat(',\t')
                                     })} &nbsp;
                                 </td>   
@@ -138,8 +144,16 @@ const TimeTable = (props) =>{
                 if(days.time.day.includes(e.target.value)){
                     for(let i = 0; i<businessHours.time.length; i++){
                         if(businessHours.time[i].day === e.target.value){
-                            businessHours.time[i].isChecked = e.target.checked
+                            // businessHours.time[i].isChecked = e.target.checked
+                            businessHours.time.splice(i, 1)
+                            if(days.time.day.includes(e.target.value))
+                                {
+                                let dayIndex = days.time.day.indexOf(e.target.value)
+                                days.time.day.splice(dayIndex, 1)
+                                }
                         }
+                        console.log(businessHours.time[i])
+                        
                     } 
                 }
         }
@@ -238,9 +252,13 @@ const TimeTable = (props) =>{
       businessHours.time.sort((a, b) => {
             const day1 = a.time[0].id
             const day2 = b.time[0].id
+            // console.log(a.time[0].id,b.time[0].id)
+            if(day1=== undefined || day2 === undefined){
+                console.log(1)
+            }
             return (day1 - day2)
         })
-
+        console.log(businessHours)
                 return setbusinessTiming( <TimeTable data={businessHours} />)
     }
 // Handling services section of the form 

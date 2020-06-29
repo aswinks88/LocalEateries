@@ -25,7 +25,37 @@ const RestaurantForm = () => {
     // useEffect(() => {
     //     hoursList() 
     // },[])
-
+    // const [cuisines, setCuisines] = useState('')
+    // const config = {
+    //     headers: {
+    //         'user-key': 'f6dda1bf5e0bfa92f296f6cc5df79488'
+    //     }
+    // }
+    // useEffect( () => {
+    //     const loadCuisines = async () => {
+    //     //    const data =  await axios.get('https://developers.zomato.com/api/v2.1/cuisines?city_id=70', config)
+    //         // .then(res => {
+    //         //   console.log(res.data.cuisines)
+    //         //   return setCuisines(res.data.cuisines)
+    //         // })
+    //         console.log(data.data)
+  
+    //         setCuisines(
+    //             data.data)
+    //     }
+    // loadCuisines()
+    // // sample()
+    // }, [])
+    //  useEffect(() => {
+         
+       
+    //  }, [])
+    // const sample = () =>{
+    //     // console.log(cuisines.map(data => {
+    //         // new Promise (wait => setTimeout(wait, 8000))
+    //         return console.log(cuisines.cuisines.map(data => {return data.cuisine.cuisine_name}))
+    //     // }))
+    // }
     const onSubmit = async (e) => {
         const restaurantData = {
             name: values.name,
@@ -86,8 +116,8 @@ const RestaurantForm = () => {
         values, checkboxValue, From, To, businessTiming, useFile, errors} = useForm(onSubmit, ValidateForm)
   
         return (
-            
             <section className='form-container'>
+                {/* <button type='button' onClick={sample}>click</button> */}
                 <div className='form-content'>
                     <div className='row clearfix'>
                     <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -322,10 +352,10 @@ const RestaurantForm = () => {
                                 <label className='col-md-3 label-control'>Additional Notes</label>
                                     <div className='col-md-9'>
                                         <textarea className='form-control' placeholder='Eg: closed on public holidays'
-                                        name='openinghours'
-                                        value={values.openinghours}
+                                        name='additonalNotes'
+                                        value={values.additonalNotes}
                                         onChange={onChange}/>
-                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    {errors.additonalNotes && <p className='error'>{errors.additonalNotes}</p>}
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
@@ -336,10 +366,10 @@ const RestaurantForm = () => {
                                 <label className='col-md-3 label-control'>A short description about your restaurant</label>
                                     <div className='col-md-9'>
                                         <textarea className='form-control' placeholder='Tell us about your restaurant'
-                                        name='openinghours'
-                                        value={values.openinghours}
+                                        name='restaurantDesc'
+                                        value={values.restaurantDesc}
                                         onChange={onChange}/>
-                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    {errors.restaurantDesc && <p className='error'>{errors.restaurantDesc}</p>}
                                     </div>
                                 </div>
 
@@ -512,10 +542,10 @@ const RestaurantForm = () => {
                                 <label className='col-md-3 label-control'>Seating Capacity</label>
                                     <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Indoor and Outdoor(if available) seating capacity'
-                                        name='delivery'
-                                        value={values.delivery}
+                                        name='seatingCapacity'
+                                        value={values.seatingCapacity}
                                         onChange={onChange}/>
-                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    {errors.seatingCapacity && <p className='error'>{errors.seatingCapacity}</p>}
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
@@ -527,14 +557,19 @@ const RestaurantForm = () => {
                                     <div className='col-md-9'>
                                         <select className='form-control' placeholder='typer of cuisine'
                                         name='cuisine'
-                                        value={values.openinghours}
+                                        value={values.cuisine}
                                         onChange={onChange}> 
-                                        <option value='Asian'>Asian</option>
-                                        <option value='American'>American</option>
-                                        <option>Indian</option>
-                                        <option>Chinese</option>
+                                       {/* { cuisines.cuisines.map(data => {return <option 
+                                       value={data.cuisine.cuisine_name} 
+                                       key={data.cuisine.cuisine_id}>
+                                       data.cuisine.cuisine_name
+                                       </option> }) } */}
+                                       <option value='Select'>Select Cuisine</option>
+                                       <option value='Asian'>Asian</option>
+                                       <option value='Indian'>Indian</option>
+                                       <option value='American'>American</option>
                                         </select>
-                                    {errors.openinghours && <p className='error'>{errors.openinghours}</p>}
+                                    {errors.cuisine && <p className='error'>{errors.cuisine}</p>}
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
@@ -573,20 +608,20 @@ const RestaurantForm = () => {
                                 <label className='col-md-3 label-control'>Phone Booking</label>
                                     <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Landline or Mobile phone number for SMS booking'
-                                        name='delivery'
-                                        value={values.delivery}
+                                        name='phoneBooking'
+                                        value={values.phoneBooking}
                                         onChange={onChange}/>
-                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    {errors.phoneBooking && <p className='error'>{errors.phoneBooking}</p>}
                                     </div>
                                 </div>
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Online Booking (if available)</label>
                                     <div className='col-md-9'>
                                         <input type='text' className='form-control' placeholder='Website link for Online booking'
-                                        name='delivery'
-                                        value={values.delivery}
+                                        name='onLine'
+                                        value={values.onLine}
                                         onChange={onChange}/>
-                                    {errors.delivery && <p className='error'>{errors.delivery}</p>}
+                                    {errors.onLine && <p className='error'>{errors.onLine}</p>}
                                     </div>
                                 </div>
                                 <h4 className='form-section'>
