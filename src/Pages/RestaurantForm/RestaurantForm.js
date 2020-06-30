@@ -57,6 +57,7 @@ const RestaurantForm = () => {
     //     // }))
     // }
     const onSubmit = async (e) => {
+        console.log('submitting')
         const restaurantData = {
             name: values.name,
             address: {
@@ -73,9 +74,22 @@ const RestaurantForm = () => {
             website: values.website,
             openinghours: values.openinghours,
             uniqueid: uniqueId,
-            date: new Date()
+            date: new Date(),
+            additonalNotes: values.additonalNotes,
+            restaurantDesc: values.restaurantDesc,
+            seatingCapacity: values.seatingCapacity,
+            phoneBooking: values.phoneBooking,
+            onLine: values.onLine,
+            cuisine: values.cuisine,
+            timing: values.timing,
+            services:services,
+            restaurantTypes: restaurantType,
+            byod: radio.byod,
+            alcohol: radio.alcohol,
+            booking: radio.booking
         }
         addItems(restaurantData)
+        console.log(restaurantData)
             // await axios.post('http://localhost:5001/restaurant/add', restaurantData)
             // .then(async res => {
             //     if(res.status === 200){
@@ -112,8 +126,17 @@ const RestaurantForm = () => {
         checkBoxHandler,
         handleServices,
         handleRadio,
+        restaurantTypes,
+        restaurantType,
         services,
-        values, checkboxValue, From, To, businessTiming, useFile, errors} = useForm(onSubmit, ValidateForm)
+        values, 
+        checkboxValue, 
+        From, 
+        To, 
+        radio,
+        businessTiming, 
+        useFile, 
+        errors} = useForm(onSubmit, ValidateForm)
   
         return (
             <section className='form-container'>
@@ -509,8 +532,8 @@ const RestaurantForm = () => {
                                         <input type='checkbox' className='custom-control-input'
                                         name='Dinein'
                                         value='Dinein'
-                                        checked={services.Dinein}
-                                        onChange={handleServices}
+                                        checked={restaurantType.Dinein}
+                                        onChange={restaurantTypes}
                                         /> 
                                        <span className='check'></span> 
                                     </label> 
@@ -520,8 +543,8 @@ const RestaurantForm = () => {
                                         <input type='checkbox' className='custom-control-input'
                                         name='Takeaway'
                                         value='Takeaway'
-                                        checked={services.Takeaway}
-                                        onChange={handleServices}
+                                        checked={restaurantType.Takeaway}
+                                        onChange={restaurantTypes}
                                         /> 
                                        <span className='check'></span> 
                                     </label> 
@@ -531,8 +554,8 @@ const RestaurantForm = () => {
                                         <input type='checkbox' className='custom-control-input'
                                         name='Drivethru'
                                         value='Drivethru'
-                                        checked={services.Drivethru}
-                                        onChange={handleServices}
+                                        checked={restaurantType.Drivethru}
+                                        onChange={restaurantTypes}
                                         /> 
                                        <span className='check'></span> 
                                     </label> 

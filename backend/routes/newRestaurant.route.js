@@ -24,9 +24,21 @@ router.route('/add').post((req, res) => {
     const charges = req.body.charges
     const contactless = req.body.contactless
     const website = req.body.website
-    const openinghours = req.body.openinghours
     const uniqueid = req.body.uniqueid
     const date = req.body.date
+    const additonalNotes= req.body.additonalNotes
+    const restaurantDesc= req.body.restaurantDesc
+    const seatingCapacity= req.body.seatingCapacity
+    const phoneBooking= req.body.phoneBooking
+    const onLine= req.body.onLine
+    const cuisine= req.body.cuisine
+    const timing= req.body.timing
+    const services = req.body.services
+    const restaurantTypes= req.body.restaurantTypes
+    const byod= req.body.byod
+    const alcohol= req.body.alcohol
+    const booking= req.body.booking
+
     const Restaurant = new restaurantModel({
         name,
         address: {
@@ -40,12 +52,23 @@ router.route('/add').post((req, res) => {
         charges,
         contactless,
         website,
-        openinghours,
         phonenumber,
         date,
         uniqueid,
+        additonalNotes,
+        restaurantDesc,
+        seatingCapacity,
+        phoneBooking,
+        onLine,
+        cuisine,
+        timing,
+        services,
+        restaurantTypes,
+        byod,
+        alcohol,
+        booking
     })
-    // console.log(Restaurant)
+    console.log(Restaurant)
     Restaurant.save()
     .then(() => {
         res.json('New Restaurant Registered')

@@ -36,9 +36,9 @@ export default function ValidateForm(values, useFile){
     if(!values.website){
         errors.website = 'website is required'
     }
-     if(!values.openinghours){
-        errors.openinghours = 'opening hours are required'
-    } 
+    //  if(!values.openinghours){
+    //     errors.openinghours = 'opening hours are required'
+    // } 
     if(!useFile.addfiles){
         errors.addfiles = 'At least one image is required to upload'
     }
@@ -49,7 +49,7 @@ export default function ValidateForm(values, useFile){
     //     errors.addfiles = 'You cannot upload more than 5 images'
     // }
 
-
+console.log(errors)
 
     return errors
 }

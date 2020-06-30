@@ -10,12 +10,42 @@ const days = {
         day: []
         }
 }
+
 const useForm = (callbkfn, ValidateForm) => {
+
     const [useFile, setFile] = useState({ addfiles: ''})
     const [From, setFrom] = useState('12:00 AM');
     const [To, setTo] = useState('12:00 AM');
     const  [businessTiming, setbusinessTiming]= useState([])
     const [check, setCheck] = useState()
+    const [checkboxValue, setCheckboxValue] = useState(
+        {
+            Monday:'',
+            Tuesday:'',
+            Wednesday:'',
+            Thursday:'',
+            Friday:'',
+            Saturday:'',
+            Sunday:''
+        }
+    )
+    const [services, setServices] = useState({
+        Breakfast: '',
+        Lunch: '',
+        Dinner: '',
+        Cafe: '',
+        Dessert: '',
+    })
+    const [restaurantType, setRestaurantType] = useState({
+        Dinein: '',
+        Takeaway: '',
+        Drivethru: ''
+    })
+    const [radio, setRadio] = useState({
+     alcohol: '',
+     byod: '',
+     booking: ''
+    })
     const [values, setValues] = useState({name: '',
     street: '',
     suburb: '',
@@ -33,34 +63,14 @@ const useForm = (callbkfn, ValidateForm) => {
     phoneBooking:'',
     onLine: '',
     cuisine: '',
-    timing: businessHours
+    timing: businessHours,
+    // services: '',
+    // restaurantType: '',
+    // byod:'',
+    // alcohol: '',
+    // booking: ''
    })
-   const [checkboxValue, setCheckboxValue] = useState(
-       {
-           Monday:'',
-           Tuesday:'',
-           Wednesday:'',
-           Thursday:'',
-           Friday:'',
-           Saturday:'',
-           Sunday:''
-       }
-   )
-   const [services, setServices] = useState({
-       Breakfast: '',
-       Lunch: '',
-       Dinner: '',
-       Cafe: '',
-       Dessert: '',
-       Dinein: '',
-       Takeaway: '',
-       Drivethru: ''
-   })
-const [radio, setRadio] = useState({
-    alcohol: '',
-    byod: '',
-    booking: ''
-})
+  
 //error handling
 const [errors, setErrors] = useState({})
 
@@ -263,21 +273,40 @@ const TimeTable = (props) =>{
     }
 // Handling services section of the form 
 const handleServices = (e) => {
+    console.log(e.target.name, e.target.value, e.target.checked)
     if(e.target.checked === true){
         setServices(
            { 
                ...services,
-            [e.target.name]: e.target.checked
+            [e.target.name]: e.target.name
             })
     } else {
         setServices(
             { 
                 ...services,
-             [e.target.name]: e.target.checked
+             [e.target.name]: 'n/a'
              })
     }
+    console.log(services)
 } 
-
+//Handling restaurant type 
+const restaurantTypes = (e) => {
+    console.log(e.target.name, e.target.value, e.target.checked)
+    if(e.target.checked === true){
+        setRestaurantType(
+           { 
+               ...restaurantType,
+            [e.target.name]: e.target.name
+            })
+    } else {
+        setRestaurantType(
+            { 
+                ...restaurantType,
+             [e.target.name]: 'n/a'
+             })
+    }
+    console.log(restaurantType)
+}
 //handling input fields
 const [isSubmitting, setisSubmitting] = useState(false)
 
@@ -296,8 +325,9 @@ const [isSubmitting, setisSubmitting] = useState(false)
 //Form submission
 const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(values)
     //handling errors here
-    setErrors(ValidateForm(values, useFile))
+    setErrors(ValidateForm(values, useFile, services, radio, restaurantType))
     setisSubmitting(true)
 }
 //this useEffect is called only when there are no errors in the form. This results in calling the callback function which is then 
@@ -322,7 +352,9 @@ callbkfn()
         setbusinessTiming,
         handleServices,
         handleRadio,
+        restaurantTypes,
         services,
+        restaurantType,
         businessTiming,
         checkboxValue,
         check,

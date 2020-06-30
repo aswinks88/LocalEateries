@@ -15,9 +15,20 @@ const restaurantSchema = new Schema({
     deliveryservices: {type: String, required: true},
     charges: {type: String, required: true},
     contactless:  {type: String, required: true},
-    openinghours:  {type: String, required: true},
     uniqueid: {type: String, required: true},
-    date: {type: Date, required: true}
+    date: {type: Date, required: true},
+    additonalNotes:{type: String, required: true}, 
+    restaurantDesc: {type: String, required: true},
+    seatingCapacity: {type: String, required: true},
+    phoneBooking:{type: String, required: true},
+    onLine: {type: String, required: true},
+    cuisine: {type: String, required: true},
+    timing: {type: Array, required: true},
+    services :{type: Array, required: true},
+    restaurantTypes: {type: Array, required: true},
+    byod: {type: String, required: true},
+    alcohol: {type: String, required: true},
+    booking: {type: String, required: true}
 },
 {
     timestamps: true
