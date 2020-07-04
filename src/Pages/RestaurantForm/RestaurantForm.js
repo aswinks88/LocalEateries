@@ -8,54 +8,28 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addItems} from '../../actions/itemActions'
 import TimePicker from 'react-bootstrap-time-picker';
-
+const cuisines = {type: []}
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
 
-
-// const from = []
 const RestaurantForm = () => {
-   
+const [useCuisine, setCuisine] = useState([])
+   useEffect(() => {
+       axios.get('http://localhost:5001/cuisines/cuisines')
+       .then(res => {
+           res.data.cuisines.map((data, index) => {
+            return setCuisine(useCuisine => [...useCuisine,data.cuisine])
+           })
+           console.log('loaded')  
+       })
+   }, [])
     // const [file, setFile] = useState('')
     // const onDrop = useCallback(acceptedFiles => {
     //     // Do something with the files
     //     console.log(acceptedFiles)
     //   }, [])
     // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-    // useEffect(() => {
-    //     hoursList() 
-    // },[])
-    // const [cuisines, setCuisines] = useState('')
-    // const config = {
-    //     headers: {
-    //         'user-key': 'f6dda1bf5e0bfa92f296f6cc5df79488'
-    //     }
-    // }
-    // useEffect( () => {
-    //     const loadCuisines = async () => {
-    //     //    const data =  await axios.get('https://developers.zomato.com/api/v2.1/cuisines?city_id=70', config)
-    //         // .then(res => {
-    //         //   console.log(res.data.cuisines)
-    //         //   return setCuisines(res.data.cuisines)
-    //         // })
-    //         console.log(data.data)
-  
-    //         setCuisines(
-    //             data.data)
-    //     }
-    // loadCuisines()
-    // // sample()
-    // }, [])
-    //  useEffect(() => {
-         
-       
-    //  }, [])
-    // const sample = () =>{
-    //     // console.log(cuisines.map(data => {
-    //         // new Promise (wait => setTimeout(wait, 8000))
-    //         return console.log(cuisines.cuisines.map(data => {return data.cuisine.cuisine_name}))
-    //     // }))
-    // }
+    
     const onSubmit = async (e) => {
         console.log('submitting')
         const restaurantData = {
@@ -395,7 +369,33 @@ const RestaurantForm = () => {
                                     {errors.restaurantDesc && <p className='error'>{errors.restaurantDesc}</p>}
                                     </div>
                                 </div>
-
+                                <h4 className='form-section'>
+                                <i className="fas fa-pizza-slice"></i>
+                                Type of Cuisine
+                                </h4>
+                                <div className='form-group row'>
+                                <label className='col-md-3 label-control'>Select Cuisine Type</label>
+                                    <div className='col-md-9'>
+                                        <select className='form-control' placeholder='type of cuisine'
+                                        name='cuisine'
+                                        value={values.cuisine}
+                                        onChange={onChange}> 
+                                        <option value="" disabled selected>Select Cuisine</option>
+                                        {useCuisine.map((data, index) => {
+                                                return <option 
+                                       value={data.cuisine_name} 
+                                       key={data.cuisine_id}>
+                                       {data.cuisine_name}
+                                       </option>
+                                        })  }
+                                       {/* <option value='Select'>Select Cuisine</option>
+                                       <option value='Asian'>Asian</option>
+                                       <option value='Indian'>Indian</option>
+                                       <option value='American'>American</option> */}
+                                        </select>
+                                    {errors.cuisine && <p className='error'>{errors.cuisine}</p>}
+                                    </div>
+                                </div>
 
                                 <h4 className='form-section'>
                                 <i className="fas fa-concierge-bell"></i>
@@ -571,30 +571,7 @@ const RestaurantForm = () => {
                                     {errors.seatingCapacity && <p className='error'>{errors.seatingCapacity}</p>}
                                     </div>
                                 </div>
-                                <h4 className='form-section'>
-                                <i className="fas fa-pizza-slice"></i>
-                                Type of Cuisine
-                                </h4>
-                                <div className='form-group row'>
-                                <label className='col-md-3 label-control'>Select Cuisine Type</label>
-                                    <div className='col-md-9'>
-                                        <select className='form-control' placeholder='typer of cuisine'
-                                        name='cuisine'
-                                        value={values.cuisine}
-                                        onChange={onChange}> 
-                                       {/* { cuisines.cuisines.map(data => {return <option 
-                                       value={data.cuisine.cuisine_name} 
-                                       key={data.cuisine.cuisine_id}>
-                                       data.cuisine.cuisine_name
-                                       </option> }) } */}
-                                       <option value='Select'>Select Cuisine</option>
-                                       <option value='Asian'>Asian</option>
-                                       <option value='Indian'>Indian</option>
-                                       <option value='American'>American</option>
-                                        </select>
-                                    {errors.cuisine && <p className='error'>{errors.cuisine}</p>}
-                                    </div>
-                                </div>
+                                
                                 <h4 className='form-section'>
                                 <i className="fas fa-address-book"></i>
                                 Reservation Info
