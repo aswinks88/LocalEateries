@@ -32,6 +32,10 @@ userRegistration.virtual('password')
     return this._password
 })
 userRegistration.methods = {
+    authenticate: function(plaintText){
+        return this.encryptPassword(plaintText) === this.encrypted_password
+    },
+
     encryptPassword: function (password){
         if(!password) return ''
         try{

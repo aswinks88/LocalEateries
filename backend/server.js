@@ -10,7 +10,7 @@ const restaurantRouter = require('./routes/newRestaurant.route')
 const users = require('./routes/User.route')
 const auth = require('./routes/Auth/Auth')
 const cuisines = require('./routes/cuisine')
-
+const expressValidator = require('express-validator')
 const uri = process.env.ATLAS_URI
 
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -29,7 +29,7 @@ app.use(morgan('dev'))
 app.use(cookie())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-
+app.use(expressValidator())
 app.use('/restaurant', restaurantRouter)
 app.use('/user', users)
 app.use('/auth', auth)
