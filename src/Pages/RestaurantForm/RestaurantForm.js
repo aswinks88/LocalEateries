@@ -8,28 +8,45 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addItems} from '../../actions/itemActions'
 import TimePicker from 'react-bootstrap-time-picker';
-const cuisines = {type: []}
+import Select from 'react-select'
+import {cuisines} from './cuisines'
+// import 'react-select-plus/dist/react-select-plus.css';
 // import  {useDropzone} from 'react-dropzone'
 const uniqueId = uid()
 
 const RestaurantForm = () => {
 const [useCuisine, setCuisine] = useState([])
    useEffect(() => {
-       axios.get('http://localhost:5001/cuisines/cuisines')
-       .then(res => {
-           res.data.cuisines.map((data, index) => {
-            return setCuisine(useCuisine => [...useCuisine,data.cuisine])
-           })
-           console.log('loaded')  
-       })
+    //    axios.get('http://localhost:5001/cuisines/cuisines')
+    //    .then(res => {
+    //        res.data.cuisines.map((data, index) => {
+    //         return setCuisine(useCuisine => [...useCuisine,data.cuisine])
+    //        })
+    //        console.log('loaded')  
+    //    })
    }, [])
+//    const sampleData = useCuisine.map(data =>{
+//      return  [{value: data.cuisine_name, label:data.cuisine_id}]
+//    })
+   console.log(cuisines)
     // const [file, setFile] = useState('')
     // const onDrop = useCallback(acceptedFiles => {
     //     // Do something with the files
     //     console.log(acceptedFiles)
     //   }, [])
     // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-    
+    const handleChange = (e) => {
+        console.group('Value Changed');
+        console.log(e);
+        // console.log(`action: ${actionMeta.action}`);
+        // console.groupEnd();
+      };
+    //   handleInputChange = (inputValue: any, actionMeta: any) => {
+    //     console.group('Input Changed');
+    //     console.log(inputValue);
+    //     console.log(`action: ${actionMeta.action}`);
+    //     console.groupEnd();
+    //   };
     const onSubmit = async (e) => {
         console.log('submitting')
         const restaurantData = {
@@ -376,7 +393,7 @@ const [useCuisine, setCuisine] = useState([])
                                 <div className='form-group row'>
                                 <label className='col-md-3 label-control'>Select Cuisine Type</label>
                                     <div className='col-md-9'>
-                                        <select className='form-control' placeholder='type of cuisine'
+                                        {/* <select className='form-control' placeholder='type of cuisine'
                                         name='cuisine'
                                         value={values.cuisine}
                                         onChange={onChange}> 
@@ -387,12 +404,20 @@ const [useCuisine, setCuisine] = useState([])
                                        key={data.cuisine_id}>
                                        {data.cuisine_name}
                                        </option>
-                                        })  }
+                                        })  } */}
                                        {/* <option value='Select'>Select Cuisine</option>
                                        <option value='Asian'>Asian</option>
                                        <option value='Indian'>Indian</option>
                                        <option value='American'>American</option> */}
-                                        </select>
+                                        {/* </select> */}
+                                        <Select  
+                                            isMulti
+                                            name="colors"
+                                            options={cuisines}
+                                            className="basic-multi-select"
+                                            classNamePrefix="select"
+                                            onChange={handleChange}
+                                        />
                                     {errors.cuisine && <p className='error'>{errors.cuisine}</p>}
                                     </div>
                                 </div>

@@ -208,3 +208,7 @@ form .form-control {
     color: blue;
     text-align: center;
 }
+.basic-multi-select{
+    border: #CCD6E6 !important;
+    color: #3F587E !important; 
+}

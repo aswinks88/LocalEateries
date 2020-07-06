@@ -2,7 +2,7 @@ const router = require('express').Router()
 const restaurantModel = require('../models/Restaurant.model')
 const multer = require('multer')
 const path = require('path')
-const uuid = require('uuidv4')
+// const uuid = require('uuidv4')
 // path(__dirname,'images')
 const DIR = path.resolve('../backend/images')
 
