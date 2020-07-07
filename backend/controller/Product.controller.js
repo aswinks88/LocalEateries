@@ -12,8 +12,24 @@ form.parse(req,(err, fields, files) => {
             error: 'Image could not be uploaded'
         })
     }
+//validate all fields
+const{name, description, price, category, quantity, shipping} = fields
+if(!name || !description || !price || !category || !quantity || !shipping){
+    return res.status(400).json({
+        error: 'All fields required'
+    })
+}
+
+
     const product = new Product(fields)
+
     if(files.image){
+        // console.log('File Photo', files.image)
+        if(files.image.size > 2000000){
+            return res.status(400).json({
+                error: 'Image size must not exceed 2mb'
+            })
+        }
         product.image.data = fs.readFileSync(files.image.path)
         product.image.contentType = files.image.type
     }
