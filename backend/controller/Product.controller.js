@@ -3,6 +3,24 @@ const _ = require('lodash')
 const Product = require('../models/product.model')
 const fs = require('fs')
 const { errorHandler } = require('../helpers/dbErrorHandler')
+
+exports.productById = (req,res, next, id) => {
+    Product.findById(id).exec((err, product) => {
+        if(err || !product) {
+            return res.status(400).json({
+                error: 'Product not found'
+            })
+        }
+        req.product = product
+        next()
+    })
+}
+
+exports.read = (req, res) => {
+    req.product.image = undefined
+    return res.json(req.product)
+}
+
 exports.createProduct = (req, res) => {
 const form = new formidable.IncomingForm()
 form.keepExtensions = true
