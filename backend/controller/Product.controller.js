@@ -21,6 +21,21 @@ exports.read = (req, res) => {
     return res.json(req.product)
 }
 
+exports.remove = (req, res) => {
+    const product = req.product
+product.remove((err, deleteProduct) => {
+    if(err) {
+        return res.status(400).json({
+            error: errorHandler(err)
+        })
+    }
+    res.json({
+        message: 'product deleted successfully'
+    })
+})
+}
+
+
 exports.createProduct = (req, res) => {
 const form = new formidable.IncomingForm()
 form.keepExtensions = true
