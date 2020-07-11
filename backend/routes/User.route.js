@@ -7,5 +7,7 @@ router.get('/secret/:userId', requireSignin, isAuth, isAdmin, (req, res) => {
         user: req.profile
     })
 } )
+
+//here the user is made available if there is user id present in the request
 router.param('userId', userByID)
 module.exports = router
