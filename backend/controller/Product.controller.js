@@ -4,6 +4,7 @@ const Product = require('../models/product.model')
 const fs = require('fs')
 const { errorHandler } = require('../helpers/dbErrorHandler')
 const product = require('../models/product.model')
+const category = require('../models/category')
 
 exports.productById = (req,res, next, id) => {
     Product.findById(id).exec((err, product) => {
@@ -145,4 +146,31 @@ exports.updateProduct = (req, res) => {
             res.send(product)
         })
         
+    }
+/*find the product based on req 
+ne = not including*/
+    exports.listRelated = (req, res) => {
+        const limit = req.query.limit ? parseInt(req.query.limit) : 6
+        Product.find({_id: {$ne: req.product}, category: req.product.category})
+        .limit(limit)
+        .populate('category', '_id name')
+        .exec((err, products) => {
+            if(err){
+                return res.status(400).json({
+                    error: 'Product not found'
+                })
+            } 
+            res.send(products)
+        })
+    }
+
+    exports.listCategories = (req, res) => {
+        Product.distinct('category', {}, (err, categories) => {
+            if(err){
+                return res.status(400).json({
+                    error: 'Product not found'
+                })
+            } 
+            res.send(categories)
+        })
     }
