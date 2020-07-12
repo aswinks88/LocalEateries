@@ -3,6 +3,7 @@ const _ = require('lodash')
 const Product = require('../models/product.model')
 const fs = require('fs')
 const { errorHandler } = require('../helpers/dbErrorHandler')
+const product = require('../models/product.model')
 
 exports.productById = (req,res, next, id) => {
     Product.findById(id).exec((err, product) => {
@@ -101,8 +102,6 @@ exports.updateProduct = (req, res) => {
             error: 'All fields required'
         })
     }
-    
-    
         let product = req.product
         product = _.extend(product, fields)
     
@@ -126,4 +125,24 @@ exports.updateProduct = (req, res) => {
             res.json(result)
         })
     })
+    }
+    /*sorting product(sell/ recent arrival etc...) */
+    exports.list = (req, res)=>{
+        const order = req.query.order ? req.query.order : 'asc'
+        const sortBy = req.query.sortBy ? req.query.sortBy : '_id'
+        const limit = req.query.limit ? parseInt(req.query.limit) : 6
+
+        Product.find().select('-image')
+        .populate('category')
+        .sort([[sortBy, order]])
+        .limit(limit)
+        .exec((err, product) => {
+            if(err){
+                return res.status(400).json({
+                    error: 'Product not found'
+                })
+            }
+            res.send(product)
+        })
+        
     }
