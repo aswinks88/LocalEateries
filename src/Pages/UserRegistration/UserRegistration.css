@@ -1,3 +1,6 @@
+.signup{
+    padding-top: 50px;
+}
 .content-body{
     padding-top: 70px;
     padding-left: 15px;
@@ -134,4 +137,12 @@ form .form-control-userreg {
     font-size: 1.6em;
     text-align: center;
     border-right: 1px solid rgba(0,0,0,.2);
+}
+.servererror{
+    color: red;
+    font-size: 16px;
+}
+.success{
+    color: green;
+    font-size: 16px;
 }

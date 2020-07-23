@@ -18,6 +18,7 @@ const useLogin = (loginSubmit, ValidateLogin) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log('handlesubmit')
         //handling errors here
         setErrors(ValidateLogin(useUser))
         setisSubmitting(true)
@@ -25,6 +26,13 @@ const useLogin = (loginSubmit, ValidateLogin) => {
     useEffect(() => {
         if(Object.keys(errors).length === 0 && isSubmitting){
             loginSubmit()
+            //clears the field after submitting
+            setUserName({
+                name: '',
+                email: '',
+                password: ''
+            })
+            setisSubmitting(false)
         }
         }, [loginSubmit, errors, isSubmitting])
 

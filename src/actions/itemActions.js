@@ -1,8 +1,9 @@
 import {GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING} from './actionType'
 import axios from 'axios'
+import {API_URL} from '../../src/config'
 export const getItems = () => dispatch => {
     dispatch(setItemsLoading())
-    axios.get('http://localhost:5001/restaurant')
+    axios.get(`${API_URL}/all`)
     .then(res => {
         dispatch({
             type: GET_ITEMS,
@@ -12,7 +13,7 @@ export const getItems = () => dispatch => {
 }
 export const addItems = item => {
     console.log(item)
-    axios.post('http://localhost:5001/restaurant/add', item)
+    axios.post(`${API_URL}/add`, item)
     .then(res => {
         // console.log(res.data)
         return{

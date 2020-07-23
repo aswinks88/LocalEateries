@@ -15,20 +15,7 @@ import {cuisines} from './cuisines'
 const uniqueId = uid()
 
 const RestaurantForm = () => {
-const [useCuisine, setCuisine] = useState([])
-   useEffect(() => {
-    //    axios.get('http://localhost:5001/cuisines/cuisines')
-    //    .then(res => {
-    //        res.data.cuisines.map((data, index) => {
-    //         return setCuisine(useCuisine => [...useCuisine,data.cuisine])
-    //        })
-    //        console.log('loaded')  
-    //    })
-   }, [])
-//    const sampleData = useCuisine.map(data =>{
-//      return  [{value: data.cuisine_name, label:data.cuisine_id}]
-//    })
-   console.log(cuisines)
+
     // const [file, setFile] = useState('')
     // const onDrop = useCallback(acceptedFiles => {
     //     // Do something with the files

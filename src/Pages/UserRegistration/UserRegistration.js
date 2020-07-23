@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useForm from '../../customhooks/useLogin'
 import './UserRegistration.css'
 import {Link} from 'react-router-dom'
@@ -7,33 +7,45 @@ import ValidateLogin from '../ValidateFormField/ValidateLogin'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {register} from '../../actions/Authactions'
+import {API_URL} from '../../../src/config'
 const UserRegistration = ()=>{
     // useEffect(prevProps => {
     //     const {error} = 
     // })
+    const [status, setStatus] = useState({
+        error: false,
+        success: false
+    })
+    const showSuccess = () => {
+        return  <div className='success' style = {{display: status.success ? '' : 'none'}}>
+                         New account is created. Please signin...
+                         
+                </div>
+    }
     const onSubmit = async () => {
         const  userData = {
             name: useUser.name,
             email: useUser.email,
             password: useUser.password
         }
-        // console.log(userData)
+        console.log(`${API_URL}`)
         // register(userData)
-        await axios.post('http://localhost:5001/user/add', userData)
+        await axios.post(`${API_URL}/signup`, userData)
         .then(res => {
             if(res.status === 200){
                 console.log('success')
-            }
+                setStatus({error: false, success: true})
+            } 
         })
         .catch(err => {
-            console.log(err)
+            setStatus({error: err.response.data.error})
         })
     }
     const {onChange,
         handleSubmit,
         useUser, errors} = useForm(onSubmit, ValidateLogin)
         return (
-            <div className='container'>
+            <div className='container signup'>
             <div className='content-body'>
                 <section className='row flexbox-container'>
                     <div className='col-lg-12 d-flex align-items-center justify-content-center'>
@@ -41,14 +53,14 @@ const UserRegistration = ()=>{
                             <div className='card border-grey border-lighten-3 px-1 py-1 m-0'>
                                 <div className='card-header border-0 pb-0'>
                                     <div className='card-title text-center'>
-                                        <h2>Local Eateries</h2>
+                                        <h2>Signup</h2>
                                     </div>
-                                    <h6 className='card-subtitle line-on-side text-muted text-center font-small-3 pt-2'>
+                                    {/* <h6 className='card-subtitle line-on-side text-muted text-center font-small-3 pt-2'>
                                        <span>One Click Registration</span> 
-                                    </h6>
+                                    </h6> */}
                                 </div>
                                 <div className = 'card-content'>
-                                    <div className='text-center'>
+                                    {/* <div className='text-center'>
                                         <a href='#' className='btn btn-social-icon mr-1 mb-1 btn-outline-facebook'>
                                             <span className='fab fa-facebook-f'>
                                             </span>
@@ -57,12 +69,14 @@ const UserRegistration = ()=>{
                                             <span className='fab fa-twitter'>
                                             </span>
                                         </a>
-                                    </div>
-                                    <p className='card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1'>
+                                    </div> */}
+                                    {/* <p className='card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1'>
                                         <span>OR</span>
-                                    </p>
+                                    </p> */}
                                     <div className='card-body'>
                                         <form onSubmit={handleSubmit}>
+                                            <div className='servererror'>{status.error}</div>  
+                                            {showSuccess()}
                                             <div className='form-group position-relative has-icon-left'>
                                                 <input type='text'
                                                  className='form-control-userreg' 

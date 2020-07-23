@@ -6,7 +6,7 @@ const path = require('path')
 // path(__dirname,'images')
 const DIR = path.resolve('../backend/images')
 
-router.route('/').get((req,res) => {
+router.route('/all').get((req,res) => {
     restaurantModel.find()
     .then(Restaurant => res.json(Restaurant))
     .catch(err => res.status(400).json('Error: ' + err))
