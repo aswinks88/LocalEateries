@@ -1,3 +1,5 @@
+Local Eateries is a food aggregator web application to promote local restaurant businesses. This app is in the initial development stages. Below you can find the screent shot of the prototype design of the application.
+
 Home page screenshot
 ![Screenshot](home1.JPG)
 ![Screenshot](home2.JPG)
