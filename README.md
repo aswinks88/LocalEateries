@@ -1,3 +1,19 @@
+Home page screenshot
+![Screenshot](home1.JPG)
+![Screenshot](home2.JPG)
+
+![Screenshot](menu.JPG)
+
+The registration form allows businesses to enter their working hours and upload restaurant logo and food images which can be used as a display picture.
+
+![Screenshot](features.JPG)
+
+
+Mobile View of the application
+
+
+![Screenshot](mobile.JPG)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
